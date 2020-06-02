@@ -1,2 +1,2 @@
-# GBG-SZ-BQF
-佰仟RabbitMQ 接口项目
+# GBG-SZ
+GBG 深圳项目集合
