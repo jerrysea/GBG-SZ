@@ -72,7 +72,8 @@ namespace Instinct.RabbitMQ.InterfaceClient.DAL
             {
                 RabbitMqClientJSONSingle.Instance.SynchronizationFlag = false;
                 RabbitMqClientJSONSingle.Instance.TriggerEventMessage(sendMessage, this.sendexChange, this.sendqueuename);
-            }                        
+            }
+            RabbitMqClientJSONSingle.Instance.AutoAck = false;
         }
         /// <summary>
         /// 注销
@@ -93,6 +94,7 @@ namespace Instinct.RabbitMQ.InterfaceClient.DAL
             RabbitMqClientFactory.MqPassword =Util.GlobalParameters.MqPassword;
             RabbitMqClientFactory.MqListenQueueName =Util.GlobalParameters.MqListenQueueName;
             RabbitMqClientFactory.MqPort = Util.GlobalParameters.MqPort;
+            RabbitMqClientFactory.MqHeartBeat = 60;
 
             this.sendexChange = Util.GlobalParameters.MqSendExchange;
             this.sendqueuename = Util.GlobalParameters.MqSendQueueName;

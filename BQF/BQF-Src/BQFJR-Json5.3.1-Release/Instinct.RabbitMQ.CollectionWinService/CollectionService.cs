@@ -85,6 +85,10 @@ namespace Instinct.RabbitMQ.CollectionWinService
             {
                 Util.GlobalVariables.SubTables.AddRange(subtablestr.Split('|'));
             }
+			
+			Util.GlobalVariables.MqAutoAck = System.Configuration.ConfigurationManager.AppSettings["MqAutoAck"] != null && Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["MqAutoAck"]).ToUpper() == "TRUE" ? true : false;
+            Util.GlobalVariables.MqHeartBeat = (ushort)(Instinct.Collection.Lib.Util.Tool.IsNumberic(System.Configuration.ConfigurationManager.AppSettings["MqHeartBeat"]) ? Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["MqHeartBeat"]) : 60);
+
         }
         /// <summary>
         /// 初始话MQ 客户端
@@ -92,7 +96,7 @@ namespace Instinct.RabbitMQ.CollectionWinService
         /// <returns></returns>
         private static SCM.RabbitMQClient.RabbitMqClientJSONSimple GetRabbitMQReceiver()
         {
-            SCM.RabbitMQClient.RabbitMqClientJSONSimple client = new SCM.RabbitMQClient.RabbitMqClientJSONSimple(Util.GlobalVariables.MqReceiveHostName, Util.GlobalVariables.MqReceiveVHostName, Util.GlobalVariables.MqListenQueueName, Util.GlobalVariables.MqReceivePort, Util.GlobalVariables.MqReceiveUserName, Util.GlobalVariables.MqReceivePassword, Util.GlobalVariables.MqEncoding, Util.GlobalVariables.MqNeedDeclareQueue);
+            SCM.RabbitMQClient.RabbitMqClientJSONSimple client = new SCM.RabbitMQClient.RabbitMqClientJSONSimple(Util.GlobalVariables.MqReceiveHostName, Util.GlobalVariables.MqReceiveVHostName, Util.GlobalVariables.MqListenQueueName, Util.GlobalVariables.MqReceivePort, Util.GlobalVariables.MqReceiveUserName, Util.GlobalVariables.MqReceivePassword, Util.GlobalVariables.MqEncoding, Util.GlobalVariables.MqNeedDeclareQueue,false,Util.GlobalVariables.MqAutoAck,Util.GlobalVariables.MqHeartBeat);
             return client;
         }
     }

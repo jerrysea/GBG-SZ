@@ -26,5 +26,7 @@ namespace Instinct.RabbitMQ.Collection.Util
         public static string MqEncoding { get; set; }
         public static bool MqNeedDeclareQueue { get; set; }
         public static ArrayList SubTables { get; set; }
+        public static bool MqAutoAck { get; set; }
+        public static ushort MqHeartBeat { get; set; }
     }
 }

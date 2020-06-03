@@ -341,8 +341,8 @@ namespace Instinct.RabbitMQ.FraudCheckService.BLL
             }
             finally
             {
-                ApplicationsTrace.Instance.RemoveElement(sAppkey);
-                if (IsOperationSuccess)
+                ApplicationsTrace.Instance.RemoveElement(sAppkey);      
+                if(IsOperationSuccess)
                     result.IsOperationOk = true; //告诉消息队列接收成功。 
             }
 

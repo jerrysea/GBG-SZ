@@ -32,7 +32,8 @@ namespace Instinct.RabbitMQ.FraudCheckService.Util
         public static bool BReferenceSynonyms { get; set; }
         public static ArrayList ReferenceTables { get; set; }
         public static bool BParticiple { get; set; }
-
         public static int WaitingSeconds { get; set; }
+        public static bool MqAutoAck { get; set; }
+        public static ushort MqHeartBeat { get; set; }
     }
 }

@@ -24,7 +24,10 @@ namespace SCM.RabbitMQClient
         /// <param name="password"></param>
         /// <param name="encode"></param>
         /// <param name="needdeclare"></param>
-        public RabbitMqClientXMLSimple(string host, string vhost, string queue, int port, string user, string password, string encode, bool needdeclare = true, bool synchronizationFlag = false)
+        /// <param name="synchronizationFlag"></param>
+        /// <param name="autoAck"></param>
+        /// <param name="heartbeat"></param>
+        public RabbitMqClientXMLSimple(string host, string vhost, string queue, int port, string user, string password, string encode, bool needdeclare = true, bool synchronizationFlag = false,bool autoAck=false, ushort heartbeat =60)
         {
             MQHost = host;
             MQVHost = vhost;
@@ -32,6 +35,8 @@ namespace SCM.RabbitMQClient
             MQUser = user;
             MQPassword = password;
             EncodingName = encode;
+            AutoAck = autoAck;
+            HeartBeat = heartbeat;
 
             var rabbitMqClientContext = new RabbitMqClientContext
             {
@@ -55,6 +60,10 @@ namespace SCM.RabbitMQClient
         public string MQPassword { get; set; }
         public bool NeedDeclare { get; set; }
         public bool SynchronizationFlag { get; set; }
+
+        public bool AutoAck { get; set; }
+
+        public ushort HeartBeat { get; set; }
 
         /// <summary>
         /// RabbitMqClient 数据上下文。
@@ -102,7 +111,7 @@ namespace SCM.RabbitMQClient
             RabbitMQ.Client.IConnection SendConnection = null;
             try
             {
-                SendConnection = RabbitMqClientFactory.CreateConnection(this.MQHost, this.MQVHost, this.MQUser, this.MQPassword, this.MQPort); //获取连接
+                SendConnection = RabbitMqClientFactory.CreateConnection(this.MQHost, this.MQVHost, this.MQUser, this.MQPassword, this.MQPort,this.HeartBeat); //获取连接
                 using (SendConnection)
                 {
                     RabbitMQ.Client.IModel SendChannel = RabbitMqClientFactory.CreateModel(SendConnection); //获取通道
@@ -144,7 +153,7 @@ namespace SCM.RabbitMQClient
             {
                 try
                 {
-                    SendConnection = RabbitMqClientFactory.CreateConnection(this.MQHost, this.MQVHost, this.MQUser, this.MQPassword, this.MQPort); //获取连接
+                    SendConnection = RabbitMqClientFactory.CreateConnection(this.MQHost, this.MQVHost, this.MQUser, this.MQPassword, this.MQPort,this.HeartBeat); //获取连接
                     using (SendConnection)
                     {
                         RabbitMQ.Client.IModel SendChannel = RabbitMqClientFactory.CreateModel(SendConnection); //获取通道
@@ -186,7 +195,7 @@ namespace SCM.RabbitMQClient
                 {
                     try
                     {
-                        SendConnection = RabbitMqClientFactory.CreateConnection(this.MQHost, this.MQVHost, this.MQUser, this.MQPassword, this.MQPort); //获取连接
+                        SendConnection = RabbitMqClientFactory.CreateConnection(this.MQHost, this.MQVHost, this.MQUser, this.MQPassword, this.MQPort,this.HeartBeat); //获取连接
                         using (SendConnection)
                         {
                             RabbitMQ.Client.IModel SendChannel = RabbitMqClientFactory.CreateModel(SendConnection); //获取通道
@@ -230,7 +239,6 @@ namespace SCM.RabbitMQClient
                             LogLocation.Log.WriteException("SCM.RabbitMQClient", ex3);
                     }
                 }
-
             }
             finally
             {
@@ -275,7 +283,7 @@ namespace SCM.RabbitMQClient
                 if (LogLocation.Log.IsNotNull())
                     LogLocation.Log.WriteInfo("START LISTENNING ", "TASK ID:[" + Task.CurrentId + "]...");
 
-                Context.ListenConnection = RabbitMqClientFactory.CreateConnection(this.MQHost, this.MQVHost, this.MQUser, this.MQPassword, this.MQPort); //获取连接
+                Context.ListenConnection = RabbitMqClientFactory.CreateConnection(this.MQHost, this.MQVHost, this.MQUser, this.MQPassword, this.MQPort,this.HeartBeat); //获取连接
 
                 Context.ListenConnection.ConnectionShutdown += (o, e) =>
                 {
@@ -298,15 +306,15 @@ namespace SCM.RabbitMQClient
                 var consumer = new EventingBasicConsumer(Context.ListenChannel); //创建事件驱动的消费者类型
                 consumer.Received += consumer_Received;
 
-                consumer.ConsumerCancelled+= (o, e) =>
-                {
-                    if (LogLocation.Log.IsNotNull())
-                        LogLocation.Log.WriteInfo("SCM.RabbitMQClient", "Consumer cancelled:" + e.ToString());
-                    ListenInit();
-                };
+                //consumer.ConsumerCancelled+= (o, e) =>
+                //{
+                //    if (LogLocation.Log.IsNotNull())
+                //        LogLocation.Log.WriteInfo("SCM.RabbitMQClient", "Consumer cancelled:" + e.ToString());
+                //    ListenInit();
+                //};
 
                 Context.ListenChannel.BasicQos(0, 1, false); //一次只获取一个消息进行消费
-                Context.ListenChannel.BasicConsume(Context.ListenQueueName, false, consumer);
+                Context.ListenChannel.BasicConsume(Context.ListenQueueName, AutoAck, consumer);
             }
             catch (Exception ex1)
             {
@@ -314,7 +322,7 @@ namespace SCM.RabbitMQClient
                     LogLocation.Log.WriteInfo("LISTENNING ERROR", ex1.Message);
                 try
                 {
-                    Context.ListenConnection = RabbitMqClientFactory.CreateConnection(this.MQHost, this.MQVHost, this.MQUser, this.MQPassword, this.MQPort); //获取连接
+                    Context.ListenConnection = RabbitMqClientFactory.CreateConnection(this.MQHost, this.MQVHost, this.MQUser, this.MQPassword, this.MQPort,this.HeartBeat); //获取连接
 
                     Context.ListenConnection.ConnectionShutdown += (o, e) =>
                     {
@@ -337,15 +345,15 @@ namespace SCM.RabbitMQClient
                     var consumer = new EventingBasicConsumer(Context.ListenChannel); //创建事件驱动的消费者类型
                     consumer.Received += consumer_Received;
 
-                    consumer.ConsumerCancelled += (o, e) =>
-                    {
-                        if (LogLocation.Log.IsNotNull())
-                            LogLocation.Log.WriteInfo("SCM.RabbitMQClient", "Consumer cancelled:" + e.ToString());
-                        ListenInit();
-                    };
+                    //consumer.ConsumerCancelled += (o, e) =>
+                    //{
+                    //    if (LogLocation.Log.IsNotNull())
+                    //        LogLocation.Log.WriteInfo("SCM.RabbitMQClient", "Consumer cancelled:" + e.ToString());
+                    //    ListenInit();
+                    //};
 
                     Context.ListenChannel.BasicQos(0, 1, false); //一次只获取一个消息进行消费
-                    Context.ListenChannel.BasicConsume(Context.ListenQueueName, false, consumer);
+                    Context.ListenChannel.BasicConsume(Context.ListenQueueName, AutoAck, consumer);
                 }
                 catch (Exception ex2)
                 {
@@ -353,7 +361,7 @@ namespace SCM.RabbitMQClient
                         LogLocation.Log.WriteInfo("LISTENNING ERROR", ex2.Message);
                     try
                     {
-                        Context.ListenConnection = RabbitMqClientFactory.CreateConnection(this.MQHost, this.MQVHost, this.MQUser, this.MQPassword, this.MQPort); //获取连接
+                        Context.ListenConnection = RabbitMqClientFactory.CreateConnection(this.MQHost, this.MQVHost, this.MQUser, this.MQPassword, this.MQPort,this.HeartBeat); //获取连接
 
                         Context.ListenConnection.ConnectionShutdown += (o, e) =>
                         {
@@ -384,7 +392,7 @@ namespace SCM.RabbitMQClient
                         };
 
                         Context.ListenChannel.BasicQos(0, 1, false); //一次只获取一个消息进行消费
-                        Context.ListenChannel.BasicConsume(Context.ListenQueueName, false, consumer);
+                        Context.ListenChannel.BasicConsume(Context.ListenQueueName, AutoAck, consumer);
                     }
                     catch (Exception ex3)
                     {
@@ -419,7 +427,7 @@ namespace SCM.RabbitMQClient
             }
             finally
             {
-                if (result != null)
+                if (result != null && !this.AutoAck)//非自动ACK
                 {
                     if (result.IsOperationOk.IsFalse())
                     {
@@ -458,7 +466,7 @@ namespace SCM.RabbitMQClient
 
             try
             {
-                SendConnection = RabbitMqClientFactory.CreateConnection(this.MQHost, this.MQVHost, this.MQUser, this.MQPassword, this.MQPort); //获取连接
+                SendConnection = RabbitMqClientFactory.CreateConnection(this.MQHost, this.MQVHost, this.MQUser, this.MQPassword, this.MQPort,this.HeartBeat); //获取连接
                 SendChannel = RabbitMqClientFactory.CreateModel(SendConnection); //获取通道
 
                 if (NeedDeclare)

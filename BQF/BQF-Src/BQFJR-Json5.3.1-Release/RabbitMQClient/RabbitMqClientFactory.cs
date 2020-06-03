@@ -16,6 +16,8 @@ namespace SCM.RabbitMQClient
         public static string MqPassword { get; set; }
         public static int MqPort { get; set; }
 
+        public static ushort MqHeartBeat { get; set; }
+
         public delegate void ThreadExceptionEventHandler(Exception ex);
 
         /// <summary>
@@ -70,14 +72,13 @@ namespace SCM.RabbitMQClient
         {
             //var mqConfigDom = MqConfigDomFactory.CreateConfigDomInstance(); //获取MQ的配置
             try
-            {
-                const ushort heartbeat = 60;
+            {               
                 var factory = new ConnectionFactory()
                 {
                     HostName = RabbitMqClientFactory.MqHostName,
                     UserName = RabbitMqClientFactory.MqUserName,
                     Password = RabbitMqClientFactory.MqPassword,
-                    RequestedHeartbeat = heartbeat, //心跳超时时间
+                    RequestedHeartbeat = RabbitMqClientFactory.MqHeartBeat, //心跳超时时间
                     AutomaticRecoveryEnabled = true //自动重连
                 };
 
@@ -91,14 +92,13 @@ namespace SCM.RabbitMQClient
             catch (Exception ex1)
             {
                 try
-                {
-                    const ushort heartbeat = 60;
+                {                   
                     var factory = new ConnectionFactory()
                     {
                         HostName = RabbitMqClientFactory.MqHostName,
                         UserName = RabbitMqClientFactory.MqUserName,
                         Password = RabbitMqClientFactory.MqPassword,
-                        RequestedHeartbeat = heartbeat, //心跳超时时间
+                        RequestedHeartbeat = RabbitMqClientFactory.MqHeartBeat, //心跳超时时间
                         AutomaticRecoveryEnabled = true //自动重连
                     };
 
@@ -112,14 +112,13 @@ namespace SCM.RabbitMQClient
                 catch (Exception ex2)
                 {
                     try
-                    {
-                        const ushort heartbeat = 60;
+                    {                       
                         var factory = new ConnectionFactory()
                         {
                             HostName = RabbitMqClientFactory.MqHostName,
                             UserName = RabbitMqClientFactory.MqUserName,
                             Password = RabbitMqClientFactory.MqPassword,
-                            RequestedHeartbeat = heartbeat, //心跳超时时间
+                            RequestedHeartbeat = RabbitMqClientFactory.MqHeartBeat, //心跳超时时间
                             AutomaticRecoveryEnabled = true //自动重连
                         };
 
@@ -143,12 +142,11 @@ namespace SCM.RabbitMQClient
         /// 创建一个IConnection。
         /// </summary>
         /// <returns></returns>
-        internal static IConnection CreateConnection(string host,string vhost,string user,string password,int port)
+        internal static IConnection CreateConnection(string host,string vhost,string user,string password,int port,ushort heartbeat)
         {
             //var mqConfigDom = MqConfigDomFactory.CreateConfigDomInstance(); //获取MQ的配置
             try
-            {
-                const ushort heartbeat = 60;
+            {               
                 var factory = new ConnectionFactory()
                 {
                     HostName = host,
@@ -168,8 +166,7 @@ namespace SCM.RabbitMQClient
             catch (Exception ex1)
             {
                 try
-                {
-                    const ushort heartbeat = 60;
+                {                    
                     var factory = new ConnectionFactory()
                     {
                         HostName = host,
@@ -189,8 +186,7 @@ namespace SCM.RabbitMQClient
                 catch (Exception ex2)
                 {
                     try
-                    {
-                        const ushort heartbeat = 60;
+                    {                        
                         var factory = new ConnectionFactory()
                         {
                             HostName = host,
