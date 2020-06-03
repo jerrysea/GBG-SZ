@@ -1,0 +1,2 @@
+InstallUtil.exe Instinct.RabbitMQ.FraudCheckWinService.exe
+pause

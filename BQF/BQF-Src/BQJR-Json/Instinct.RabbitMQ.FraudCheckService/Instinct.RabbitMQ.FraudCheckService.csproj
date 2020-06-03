@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{12A3AEDA-CA82-44A8-A3B4-BBC3F212AFDF}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Instinct.RabbitMQ.FraudCheckService</RootNamespace>
+    <AssemblyName>Instinct.RabbitMQ.FraudCheckService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Instinct.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DecTech.Library, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\DecTech.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\DLL\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="PanGu, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\PanGu.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\ApplicationsTrace.cs" />
+    <Compile Include="BLL\InstinctBusiness.cs" />
+    <Compile Include="BLL\ParticipleLayout.cs" />
+    <Compile Include="BLL\ParticipleParameter.cs" />
+    <Compile Include="BLL\ParticipleParse.cs" />
+    <Compile Include="DAL\Error.cs" />
+    <Compile Include="DAL\InstinctFraudCheckThread.cs" />
+    <Compile Include="DAL\ParticipleDAl.cs" />
+    <Compile Include="DAL\ReferenceColumn.cs" />
+    <Compile Include="DAL\ReferenceTable.cs" />
+    <Compile Include="DAL\ReferenceTableDAL.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BLL\FM_Address.cs" />
+    <Compile Include="BLL\FM_Company.cs" />
+    <Compile Include="Util\GlobalVariable.cs" />
+    <Compile Include="Util\LogHelper.cs" />
+    <Compile Include="Util\MessageTypeConst.cs" />
+    <Compile Include="BLL\Segmentation.cs" />
+    <Compile Include="Util\SqlHelper.cs" />
+    <Compile Include="Util\SqlHelperSchemaExtension.cs" />
+    <Compile Include="Util\Tool.cs" />
+    <Compile Include="Util\XMLProcess.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassXMLParse_OnlineService\ClassXMLParse.vbproj">
+      <Project>{0f2fa5d0-d0f9-4c0d-a331-c0637bd8d78b}</Project>
+      <Name>ClassXMLParse</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClsOnlineServiceCall\ClsOnlineServiceCall.vbproj">
+      <Project>{eb2c4457-878e-47d2-82a0-6b646f440096}</Project>
+      <Name>ClsOnlineServiceCall</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Instinct.XmlConversion\Instinct.XmlConversion.vbproj">
+      <Project>{000e3f3d-7555-4ccb-8e47-30ed46cc971d}</Project>
+      <Name>Instinct.XmlConversion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RabbitMQClient\RabbitMQClient.csproj">
+      <Project>{ad62369c-7dea-4b7a-81db-e4701a442a72}</Project>
+      <Name>RabbitMQClient</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Instinct.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

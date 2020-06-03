@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="INGCriminalSync" targetNamespace="http://INGCriminalSync.dectechsolutions.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="INGCriminalSync">
+    <xs:complexType>
+      <xs:choice id="CriminalRecord" minOccurs="1" maxOccurs="1">
+        <xs:element name="SM_GERCEK" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="BAŞVURU_NO" type="xs:string" minOccurs="1" maxOccurs="1"/>
+              <xs:element name="ADI" type="xs:string" />
+              <xs:element name="SOYADI" type="xs:string" />
+              <xs:element name="TC_KIMLIK_NUMARASI" type="xs:string" />
+              <xs:element name="NITELIK" type="xs:string" />
+              <xs:element name="KAYIT_TURU" type="xs:string" />
+              <xs:element name="PARA_KODU" type="xs:string" />
+              <xs:element name="KALMA_SURESI" type="xs:string" />
+              <xs:element name="NUMARA" type="xs:string" />
+              <xs:element name="GM_GORUNTULENSIN" type="xs:string" />
+              <xs:element name="KAYIT_TARIHI" type="xs:string" />
+              <xs:element name="DATA_AKTARAN_PROGRAM" type="xs:string" />
+              <xs:element name="BILGI_GIREN" type="xs:string" />
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SM_TUZEL" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="BAŞVURU_NO" type="xs:string" minOccurs="1" maxOccurs="1"/>
+              <xs:element name="UNVAN" type="xs:string" />
+              <xs:element name="VERGI_NUMARASI" type="xs:string" />
+              <xs:element name="NITELIK" type="xs:string" />
+              <xs:element name="KAYIT_TURU" type="xs:string" />
+              <xs:element name="PARA_KODU" type="xs:string" />
+              <xs:element name="KALMA_SURESI" type="xs:string" />
+              <xs:element name="NUMARA" type="xs:string" />
+              <xs:element name="GM_GORUNTULENSIN" type="xs:string" />
+              <xs:element name="KAYIT_TARIHI" type="xs:string" />
+              <xs:element name="DATA_AKTARAN_PROGRAM" type="xs:string" />
+              <xs:element name="BILGI_GIREN" type="xs:string" />
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+      <xs:attribute name="Operation" default="Add">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Add" />
+            <xs:enumeration value="Delete" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

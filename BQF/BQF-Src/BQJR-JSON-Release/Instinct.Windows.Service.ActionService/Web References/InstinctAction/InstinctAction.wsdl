@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="InstinctActionStringReturn">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="actionString" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InstinctActionStringReturnResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InstinctActionStringReturnResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InstinctActionXMLStringReturn">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="actionString" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InstinctActionXMLStringReturnResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InstinctActionXMLStringReturnResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="InstinctActionStringReturnSoapIn">
+    <wsdl:part name="parameters" element="tns:InstinctActionStringReturn" />
+  </wsdl:message>
+  <wsdl:message name="InstinctActionStringReturnSoapOut">
+    <wsdl:part name="parameters" element="tns:InstinctActionStringReturnResponse" />
+  </wsdl:message>
+  <wsdl:message name="InstinctActionXMLStringReturnSoapIn">
+    <wsdl:part name="parameters" element="tns:InstinctActionXMLStringReturn" />
+  </wsdl:message>
+  <wsdl:message name="InstinctActionXMLStringReturnSoapOut">
+    <wsdl:part name="parameters" element="tns:InstinctActionXMLStringReturnResponse" />
+  </wsdl:message>
+  <wsdl:portType name="InstinctActionWebServiceSoap">
+    <wsdl:operation name="InstinctActionStringReturn">
+      <wsdl:input message="tns:InstinctActionStringReturnSoapIn" />
+      <wsdl:output message="tns:InstinctActionStringReturnSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InstinctActionXMLStringReturn">
+      <wsdl:input message="tns:InstinctActionXMLStringReturnSoapIn" />
+      <wsdl:output message="tns:InstinctActionXMLStringReturnSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="InstinctActionWebServiceSoap" type="tns:InstinctActionWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InstinctActionStringReturn">
+      <soap:operation soapAction="http://tempuri.org/InstinctActionStringReturn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InstinctActionXMLStringReturn">
+      <soap:operation soapAction="http://tempuri.org/InstinctActionXMLStringReturn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="InstinctActionWebServiceSoap12" type="tns:InstinctActionWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InstinctActionStringReturn">
+      <soap12:operation soapAction="http://tempuri.org/InstinctActionStringReturn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InstinctActionXMLStringReturn">
+      <soap12:operation soapAction="http://tempuri.org/InstinctActionXMLStringReturn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="InstinctActionWebService">
+    <wsdl:port name="InstinctActionWebServiceSoap" binding="tns:InstinctActionWebServiceSoap">
+      <soap:address location="http://localhost/InstinctAction/InstinctAction.asmx" />
+    </wsdl:port>
+    <wsdl:port name="InstinctActionWebServiceSoap12" binding="tns:InstinctActionWebServiceSoap12">
+      <soap12:address location="http://localhost/InstinctAction/InstinctAction.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
