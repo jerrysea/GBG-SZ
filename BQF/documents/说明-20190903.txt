@@ -1,0 +1,2 @@
+替换了盘古分词Dectech 版本
+盘古分词Dectech 版本，固定了Dict 文件路径，所以需要Dectech 版本。
