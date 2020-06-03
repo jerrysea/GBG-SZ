@@ -1,0 +1,41 @@
+2019-09-03 16:27:22,941 [3] INFO  loginfo - START LISTENNING :TASK ID:[1]...
+2019-09-03 16:27:43,107 [3] INFO  loginfo - LISTENNING ERROR:操作已超时。
+2019-09-03 16:28:03,115 [3] INFO  loginfo - LISTENNING ERROR:操作已超时。
+2019-09-03 16:28:23,122 [3] INFO  loginfo - LISTENNING ERROR:操作已超时。
+2019-09-03 16:31:42,567 [3] INFO  loginfo - START LISTENNING :TASK ID:[1]...
+2019-09-03 16:32:19,975 [11] INFO  loginfo - 827696fe-1eea-49d4-9978-383c7981d0ba
+2019-09-03 16:32:19,975 [11] INFO  loginfo - :
+
+2019-09-03 16:32:19,976 [11] INFO  loginfo - RESPONSE:{"OutputSchema":{"Output":{"Organisation":"BQF","Country_Code":"CN","Group_Member_Code":"","Application_Number":"S2019080813000058700","Application_Date":"","Application_Type":"SC","Error_Code":"103","Remark":""}}}
+2019-09-03 16:32:19,993 [3] INFO  loginfo - a38a0c02-c50f-4857-8220-78bda887bf2c
+2019-09-03 16:32:19,994 [3] INFO  loginfo - :
+
+2019-09-03 16:32:19,994 [3] INFO  loginfo - RESPONSE:{"OutputSchema":{"Output":{"Organisation":"BQF","Country_Code":"CN","Group_Member_Code":"","Application_Number":"S2019080813000058700","Application_Date":"","Application_Type":"SC","Error_Code":"103","Remark":""}}}
+2019-09-03 16:40:10,380 [9] INFO  loginfo - 54a11b05-a0f9-4dc8-a067-9e3b800d17ec
+2019-09-03 16:40:10,380 [9] INFO  loginfo - :
+
+2019-09-03 16:40:10,381 [9] INFO  loginfo - RESPONSE:{"OutputSchema":{"Output":{"Organisation":"BQF","Country_Code":"CN","Group_Member_Code":"","Application_Number":"S2019080813000058700","Application_Date":"","Application_Type":"SC","Error_Code":"106","Remark":""}}}
+2019-09-03 16:40:10,431 [11] INFO  loginfo - f32798a7-9fa9-491c-a389-245c2ffceffe
+2019-09-03 16:40:10,432 [11] INFO  loginfo - :
+
+2019-09-03 16:40:10,432 [11] INFO  loginfo - RESPONSE:{"OutputSchema":{"Output":{"Organisation":"BQF","Country_Code":"CN","Group_Member_Code":"","Application_Number":"S2019080813000058700","Application_Date":"","Application_Type":"SC","Error_Code":"106","Remark":""}}}
+2019-09-03 16:58:21,001 [9] INFO  loginfo - 068511dc-034b-4635-9242-d56646d46dfa
+2019-09-03 16:58:21,002 [9] INFO  loginfo - :
+
+2019-09-03 16:58:21,002 [9] INFO  loginfo - RESPONSE:{"OutputSchema":{"Output":{"Organisation":"BQF","Country_Code":"CN","Group_Member_Code":"","Application_Number":"S2019080813000058700","Application_Date":"","Application_Type":"SC","Error_Code":"106","Remark":""}}}
+2019-09-03 16:59:23,617 [9] INFO  loginfo - c1f2d1c8-3a79-42aa-b5a5-4042cda22ab1
+2019-09-03 16:59:23,617 [9] INFO  loginfo - :
+
+2019-09-03 16:59:23,618 [9] INFO  loginfo - RESPONSE:{"OutputSchema":{"Output":{"Organisation":"BQF","Country_Code":"CN","Group_Member_Code":"","Application_Number":"S2019080813000058700","Application_Date":"","Application_Type":"SC","Error_Code":"106","Remark":""}}}
+2019-09-03 17:01:27,761 [10] INFO  loginfo - 217379f7-f7a9-4495-bd9b-adc90f70e670
+2019-09-03 17:01:27,762 [10] INFO  loginfo - :
+
+2019-09-03 17:01:27,763 [10] INFO  loginfo - RESPONSE:{"OutputSchema":{"Output":{"Organisation":"BQF","Country_Code":"CN","Group_Member_Code":"","Application_Number":"S2019080813000058700","Application_Date":"","Application_Type":"SC","Error_Code":"106","Remark":""}}}
+2019-09-03 17:07:41,440 [6] INFO  loginfo - dbd5bda6-b75a-4dbf-81a3-83831c1ae30c
+2019-09-03 17:07:41,440 [6] INFO  loginfo - :
+
+2019-09-03 17:07:41,441 [6] INFO  loginfo - RESPONSE:{"OutputSchema":{"Output":{"Organisation":"BQF","Country_Code":"CN","Group_Member_Code":"","Application_Number":"S2019080813000058700","Application_Date":"","Application_Type":"SC","Error_Code":"99","Remark":"未将对象引用设置到对象的实例。"}}}
+2019-09-03 17:10:22,457 [5] INFO  loginfo - d2df835b-865f-4f2b-bffd-92db14379313
+2019-09-03 17:10:22,457 [5] INFO  loginfo - :
+
+2019-09-03 17:10:22,458 [5] INFO  loginfo - RESPONSE:{"OutputSchema":{"Output":{"Organisation":"BQF","Country_Code":"CN","Group_Member_Code":"","Application_Number":"S2019080813000058700","Application_Date":"","Application_Type":"SC","Error_Code":"200","Remark":"THE SEGMENTATION  DATA OF THE APPLICATION\"{0}\" FAIL TO SAVE."}}}

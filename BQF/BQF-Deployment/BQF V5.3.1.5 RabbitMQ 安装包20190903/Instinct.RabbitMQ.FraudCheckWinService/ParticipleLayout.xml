@@ -1,0 +1,16 @@
+<ParticipleSchema>
+<Applicant>
+<Participle PName="Applicant.Full_Home_Address" PType="Address">
+<Home_Address1/>
+<Home_Address2/>
+<Home_Address3/>
+<Home_Address4/>
+<Home_Address5/>
+<Home_Address6/>
+</Participle>
+<Participle PName="Applicant.City" PType="Address">
+<Home_Address1/>
+<Home_Address2/>
+</Participle>
+</Applicant>
+</ParticipleSchema>
