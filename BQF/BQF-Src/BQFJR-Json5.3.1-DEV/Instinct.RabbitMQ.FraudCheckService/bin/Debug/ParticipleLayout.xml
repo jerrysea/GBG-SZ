@@ -1,0 +1,38 @@
+<ParticipleSchema>
+<Applicant>
+<Participle PName="A_Applicant.Home_Address" PType="ADDRESS">
+<Home_Address1/>
+<Home_Address2/>
+<Home_Address3/>
+<Home_Address4/>
+<Home_Address5/>
+</Participle>
+<Participle PName="A_Applicant.Office_Address" PType="ADDRESS">
+<Company_Address1/>
+<Company_Address2/>
+<Company_Address3/>
+<Company_Address4/>
+<Company_Address5/>
+<Company_Address6/>
+</Participle>
+</Applicant>
+<Guarantor>
+<Participle PName="A_Guarantor.Home_Address" PType="ADDRESS">
+<Home_Address1/>
+</Participle>
+</Guarantor>
+<CBB>
+<Participle PName="A_CBB.Home_Address" PType="ADDRESS">
+<Home_Address1/>
+<Home_Address2/>
+<Home_Address3/>
+<Home_Address4/>
+<Home_Address5/>
+</Participle>
+</CBB>
+<Accountant_Solicitor>
+<Participle PName="A_Accountant_Solicitor.Surname" PType="ADDRESS">
+<Surname/>
+</Participle>
+</Accountant_Solicitor>
+</ParticipleSchema>
