@@ -12,9 +12,12 @@ namespace Instinct.RabbitMQ.FraudCheckService.BLL
     /// </summary>
     public class ApplicationsTrace : Dictionary<string, int>
     {
-        private static ApplicationsTrace _instance = null;
-        private static readonly object SynObject = new object();
+        private static ApplicationsTrace _instance = new ApplicationsTrace();
+        //private static readonly object SynObject = new object();
         public static readonly object LckObject = new object();
+
+        private ApplicationsTrace() { }
+
         // <summary>
         /// Gets the instance.
         /// </summary>
@@ -22,15 +25,15 @@ namespace Instinct.RabbitMQ.FraudCheckService.BLL
         {
             get
             {
-                if (_instance == null)
-                {
-                    // Syn operation.
-                    lock (SynObject)
-                    {
-                        if (_instance == null)
-                            _instance = new ApplicationsTrace();
-                    }
-                }
+                //if (_instance == null)
+                //{
+                //    // Syn operation.
+                //    lock (SynObject)
+                //    {
+                //        if (_instance == null)
+                //            _instance = new ApplicationsTrace();
+                //    }
+                //}
                 return _instance;                
             }
         }
