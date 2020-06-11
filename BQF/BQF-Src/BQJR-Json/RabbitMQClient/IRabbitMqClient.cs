@@ -17,6 +17,10 @@ namespace SCM.RabbitMQClient
         /// </summary>
         bool NeedDeclare { get; set; }
 
+        bool AutoAck { get; set; }
+
+        ushort HeartBeat { get; set; }
+
         /// <summary>
         /// 同步标识
         /// 即RPC模式标识

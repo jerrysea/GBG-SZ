@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Data;
+using System.Security;
 
 namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
 {
@@ -164,24 +165,24 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                                 }
                                 else
                                 {
-                                    throw new Exception("The Participle xml node has no fields.");
+                                    throw new Exception("THE PARTICIPLE XML NODE HAS NO FIELDS.");
                                 }
                             }
                             else
                             {
-                                throw new Exception("The Participle xml node 's layout is wrong.");
+                                throw new Exception("THE PARTICIPLE XML NODE 'S LAYOUT IS WRONG.");
                             }
                         }
                     }
                     else
                     {
-                        throw new Exception("The table xml node has no \"participle\" nodes.");
+                        throw new Exception("THE TABLE XML NODE HAS NO \"PARTICIPLE\" NODES.");
                     }
                 }
             }
             else
             {
-                throw new Exception("The participle layout file does not exist.");
+                throw new Exception("THE PARTICIPLE LAYOUT FILE DOES NOT EXIST.");
             }
         }
         /// <summary>
@@ -207,7 +208,7 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                         List<string> fields = layout.Fields;
                         if (!CheckMatched(fields, fieldsDt, ref layoutMsg))
                         {
-                            sbMsg.AppendLine(string.Format("The table \"{0}\" does not matched. error info:{1}", tabname, layoutMsg));
+                            sbMsg.AppendLine(string.Format("THE TABLE \"{0}\" DOES NOT MATCHED. ERROR INFO:{1}", tabname, layoutMsg));
                             iunmatched++;
                         }
                     }
@@ -279,7 +280,7 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                         if (rows.Length != 1)
                         {
                             iunmatched++;
-                            sbMsg.AppendLine(string.Format("The layout does not contain the filed \"{0}\".", f));
+                            sbMsg.AppendLine(string.Format("THE LAYOUT DOES NOT CONTAIN THE FILED \"{0}\".", f));
                         }
                     }
                     if (iunmatched > 0)
@@ -290,13 +291,13 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                 else
                 {
                     bMatched = false;
-                    sbMsg.AppendLine("The number of the layout is less than the number of the fileds.");
+                    sbMsg.AppendLine("THE NUMBER OF THE LAYOUT IS LESS THAN THE NUMBER OF THE FILEDS.");
                 }
             }
             else
             {
                 bMatched = false;
-                sbMsg.AppendLine("The layout/the fields is empty.");
+                sbMsg.AppendLine("THE LAYOUT/THE FIELDS IS EMPTY.");
             }
             errMsg = sbMsg.ToString();
             return bMatched;
@@ -315,13 +316,13 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
             StringBuilder content = new StringBuilder();
             if (address != null)
             {
-                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Province", address.Province));
-                content.AppendLine(string.Format("<{0}>{1}</{0}>", "City", address.City));
-                content.AppendLine(string.Format("<{0}>{1}</{0}>", "District", address.District));
-                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Street", address.Street));
-                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Detail", address.Detail));
-                content.AppendLine(string.Format("<{0}>{1}</{0}>", "AddressNumber", address.AddressNumber));
-                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Landmark", address.Landmark));
+                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Province", SecurityElement.Escape(address.Province)));
+                content.AppendLine(string.Format("<{0}>{1}</{0}>", "City", SecurityElement.Escape(address.City)));
+                content.AppendLine(string.Format("<{0}>{1}</{0}>", "District", SecurityElement.Escape(address.District)));
+                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Street", SecurityElement.Escape(address.Street)));
+                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Detail", SecurityElement.Escape(address.Detail)));
+                content.AppendLine(string.Format("<{0}>{1}</{0}>", "AddressNumber", SecurityElement.Escape(address.AddressNumber)));
+                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Landmark", SecurityElement.Escape(address.Landmark)));
             }
             return content.ToString();
         }
@@ -335,15 +336,15 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
             StringBuilder content = new StringBuilder();
             if (company != null)
             {
-                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Province", company.Province));
-                content.AppendLine(string.Format("<{0}>{1}</{0}>", "City", company.City));
-                content.AppendLine(string.Format("<{0}>{1}</{0}>", "District", company.District));
-                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Industry", company.Industry));
-                content.AppendLine(string.Format("<{0}>{1}</{0}>", "CompanyType", company.CompanyType));
-                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Branch", company.Branch));
-                content.AppendLine(string.Format("<{0}>{1}</{0}>", "CoreName", company.CoreName));
-                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Department", company.Department));
-                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Other", company.Other));
+                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Province", SecurityElement.Escape(company.Province)));
+                content.AppendLine(string.Format("<{0}>{1}</{0}>", "City", SecurityElement.Escape(company.City)));
+                content.AppendLine(string.Format("<{0}>{1}</{0}>", "District", SecurityElement.Escape(company.District)));
+                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Industry", SecurityElement.Escape(company.Industry)));
+                content.AppendLine(string.Format("<{0}>{1}</{0}>", "CompanyType", SecurityElement.Escape(company.CompanyType)));
+                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Branch", SecurityElement.Escape(company.Branch)));
+                content.AppendLine(string.Format("<{0}>{1}</{0}>", "CoreName", SecurityElement.Escape(company.CoreName)));
+                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Department",SecurityElement.Escape(company.Department)));
+                content.AppendLine(string.Format("<{0}>{1}</{0}>", "Other", SecurityElement.Escape(company.Other)));
             }
             return content.ToString();
         }

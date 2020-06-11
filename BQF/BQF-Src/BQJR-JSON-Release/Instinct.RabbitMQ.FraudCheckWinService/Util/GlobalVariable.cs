@@ -34,5 +34,7 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.Util
         public static bool BParticiple { get; set; }
 
         public static int WaitingSeconds { get; set; }
+        public static bool MqAutoAck { get; set; }
+        public static ushort MqHeartBeat { get; set; }
     }
 }

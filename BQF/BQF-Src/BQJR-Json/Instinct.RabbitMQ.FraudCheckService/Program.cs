@@ -118,6 +118,10 @@ namespace Instinct.RabbitMQ.FraudCheckService
                     Util.GlobalVariable.CompanySuffix.Add(drCompanySuffix["Company Suffix"]);
                 }
             }
+
+            Util.GlobalVariable.MqAutoAck = System.Configuration.ConfigurationManager.AppSettings["MqAutoAck"] !=null && Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["MqAutoAck"]).ToUpper()=="TRUE" ? true : false;
+            Util.GlobalVariable.MqHeartBeat =(ushort)( Util.Tool.IsNumberic(System.Configuration.ConfigurationManager.AppSettings["MqHeartBeat"]) ? Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["MqHeartBeat"]) : 60);
+
         }
         /// <summary>
         /// 初始化发送MQ者
@@ -125,7 +129,7 @@ namespace Instinct.RabbitMQ.FraudCheckService
         /// <returns></returns>
         private static SCM.RabbitMQClient.RabbitMqClientJSONSimple GetRabbitMQSender()
         {
-            SCM.RabbitMQClient.RabbitMqClientJSONSimple client = new SCM.RabbitMQClient.RabbitMqClientJSONSimple(Util.GlobalVariable.MqSendHostName, Util.GlobalVariable.MqSendVHostName, Util.GlobalVariable.MqSendQueueName, Util.GlobalVariable.MqSendPort, Util.GlobalVariable.MqSendUserName, Util.GlobalVariable.MqSendPassword, Util.GlobalVariable.MqEncoding,Util.GlobalVariable.MqNeedDeclareQueue,Util.GlobalVariable.MqSynchronization  );
+            SCM.RabbitMQClient.RabbitMqClientJSONSimple client = new SCM.RabbitMQClient.RabbitMqClientJSONSimple(Util.GlobalVariable.MqSendHostName, Util.GlobalVariable.MqSendVHostName, Util.GlobalVariable.MqSendQueueName, Util.GlobalVariable.MqSendPort, Util.GlobalVariable.MqSendUserName, Util.GlobalVariable.MqSendPassword, Util.GlobalVariable.MqEncoding,Util.GlobalVariable.MqNeedDeclareQueue,Util.GlobalVariable.MqSynchronization, Util.GlobalVariable.MqAutoAck, Util.GlobalVariable.MqHeartBeat);
             client.ThreadExceptionEvents += new SCM.RabbitMQClient.RabbitMqClientFactory.ThreadExceptionEventHandler(OnThreadException);
             return client;
         }
@@ -135,7 +139,7 @@ namespace Instinct.RabbitMQ.FraudCheckService
         /// <returns></returns>
         private static SCM.RabbitMQClient.RabbitMqClientJSONSimple GetRabbitMQReceiver()
         {
-            SCM.RabbitMQClient.RabbitMqClientJSONSimple client = new SCM.RabbitMQClient.RabbitMqClientJSONSimple(Util.GlobalVariable.MqReceiveHostName, Util.GlobalVariable.MqReceiveVHostName, Util.GlobalVariable.MqListenQueueName, Util.GlobalVariable.MqReceivePort, Util.GlobalVariable.MqReceiveUserName, Util.GlobalVariable.MqReceivePassword, Util.GlobalVariable.MqEncoding, Util.GlobalVariable.MqNeedDeclareQueue, Util.GlobalVariable.MqSynchronization);
+            SCM.RabbitMQClient.RabbitMqClientJSONSimple client = new SCM.RabbitMQClient.RabbitMqClientJSONSimple(Util.GlobalVariable.MqReceiveHostName, Util.GlobalVariable.MqReceiveVHostName, Util.GlobalVariable.MqListenQueueName, Util.GlobalVariable.MqReceivePort, Util.GlobalVariable.MqReceiveUserName, Util.GlobalVariable.MqReceivePassword, Util.GlobalVariable.MqEncoding, Util.GlobalVariable.MqNeedDeclareQueue, Util.GlobalVariable.MqSynchronization, Util.GlobalVariable.MqAutoAck, Util.GlobalVariable.MqHeartBeat);
             client.ThreadExceptionEvents += new SCM.RabbitMQClient.RabbitMqClientFactory.ThreadExceptionEventHandler(OnThreadException);
             return client;
         }

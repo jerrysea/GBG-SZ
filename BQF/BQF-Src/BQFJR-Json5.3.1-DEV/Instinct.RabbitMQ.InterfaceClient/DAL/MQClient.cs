@@ -61,7 +61,7 @@ namespace Instinct.RabbitMQ.InterfaceClient.DAL
             string sMarkCode = Guid.NewGuid().ToString();
             var sendMessage =
                         EventMessageFactory.CreateEventMessageInstance(message,sMarkCode, encoder, methodname.ToUpper());
-
+            //发送返回值到队列中 
             if (Util.GlobalParameters.MqSynchronization)
             {
                 RabbitMqClientJSONSingle.Instance.SynchronizationFlag = true;

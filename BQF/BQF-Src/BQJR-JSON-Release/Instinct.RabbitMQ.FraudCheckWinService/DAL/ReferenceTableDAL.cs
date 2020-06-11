@@ -189,6 +189,41 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.DAL
 
             Util.SqlHelper.ExecuteNonQuery(Util.GlobalVariable.CnnString, CommandType.Text, sql);
         }
+        /// <summary>
+        /// 新增引用表数据
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="table"></param>
+        /// <param name="fields"></param>
+        /// <param name="appkey"></param>
+        public static void InsertReferenceData(DataTable dt, string table, ArrayList fields, string appkey)
+        {
+            StringBuilder sbSql = new StringBuilder();
+            string template ="INSERT INTO [DBO].[{0}] WITH(ROWLOCK) ({1}) VALUES({2})";
+            if (dt != null && dt.Rows.Count > 0 && fields!=null && fields.Count>0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    StringBuilder sbFields = new StringBuilder();
+                    StringBuilder sbValues = new StringBuilder();
+                    for(int i= 0;i<fields.Count;i++)
+                    {
+                        string skey = fields[i].ToString();
+                        string svalue = Convert.ToString(row[skey]);
+                        sbFields.Append(skey);
+                        sbValues.Append(string.Format("'{0}'",svalue));
+                        if (i < fields.Count - 1)
+                        {                            
+                            sbFields.Append(",");
+                            sbValues.Append(",");
+                        }                        
+                    }
+                    sbSql.AppendLine(string.Format(template, table, sbFields.ToString(), sbValues.ToString()));
+                }
+                Util.SqlHelper.ExecuteNonQuery(Util.GlobalVariable.CnnString, CommandType.Text, sbSql.ToString());
+            }
+            
+        }
 
         public static void DeleteReferenceData(ArrayList dbtablelist,string appkey)
         {
@@ -208,7 +243,7 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.DAL
 
         public static DataTable GetSynonymsNames(string referenceTableName)
         {
-            string sql = string.Format("select LEFT(RIGHT(base_object_name,7),6) AS base_object_name,name from sys.synonyms(NOLOCK) WHERE name LIKE '{0}%'", referenceTableName);
+            string sql = string.Format("SELECT LEFT(RIGHT(BASE_OBJECT_NAME,7),6) AS BASE_OBJECT_NAME,NAME FROM SYS.SYNONYMS(NOLOCK) WHERE NAME LIKE '{0}%'", referenceTableName);
             return Util.SqlHelper.ExecuteDataTable(Util.GlobalVariable.CnnString, sql, null);
         }
     }

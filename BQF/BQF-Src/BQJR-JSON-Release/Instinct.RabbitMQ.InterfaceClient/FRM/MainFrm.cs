@@ -74,7 +74,6 @@ namespace Instinct.RabbitMQ.InterfaceClient.Frm
             try
             {
                 this.client.PressInQueue(inputtext, methodname);
-
                 Util.MessageUtil.ShowWarning("成功入列！！！");
             }
             catch (Exception ex)
@@ -161,7 +160,9 @@ namespace Instinct.RabbitMQ.InterfaceClient.Frm
                     this.client.Exit();
                 }
                 catch (Exception ex)
-                { }
+                {
+                    Util.MessageUtil.ShowError(ex.Message);
+                }
                 this.groupBox2.Enabled = false;
                 this.client = null;
             }

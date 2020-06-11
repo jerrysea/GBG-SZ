@@ -14,7 +14,7 @@ namespace Instinct.RabbitMQ.FraudCheckService.BLL
     {
         private static ApplicationsTrace _instance = null;
         private static readonly object SynObject = new object();
-
+        public static readonly object LckObject = new object();
         // <summary>
         /// Gets the instance.
         /// </summary>
@@ -22,12 +22,52 @@ namespace Instinct.RabbitMQ.FraudCheckService.BLL
         {
             get
             {
-                // Syn operation.
-                lock (SynObject)
+                if (_instance == null)
                 {
-                    return _instance ?? (_instance = new ApplicationsTrace());
+                    // Syn operation.
+                    lock (SynObject)
+                    {
+                        if (_instance == null)
+                            _instance = new ApplicationsTrace();
+                    }
+                }
+                return _instance;                
+            }
+        }
+
+        public bool AddElement(string sAppkey)
+        {
+            lock (LckObject)
+            {
+                if (!ApplicationsTrace.Instance.ContainsKey(sAppkey))
+                {
+                    ApplicationsTrace.Instance.Add(sAppkey, 1);
+                    return true;
+                }
+                else {
+                    ApplicationsTrace.Instance[sAppkey]++;
+                    if (ApplicationsTrace.Instance[sAppkey] > 150)
+                    {
+                        ApplicationsTrace.Instance.Remove(sAppkey);
+                        ApplicationsTrace.Instance.Add(sAppkey, 1);
+                        return true;
+                    }
+                    return false;
                 }
             }
         }
+
+        public void RemoveElement(string sAppkey)
+        {
+            lock (LckObject)
+            {
+                if (ApplicationsTrace.Instance.ContainsKey(sAppkey))
+                {
+                    ApplicationsTrace.Instance.Remove(sAppkey);
+                    
+                }
+            }
+        }
+
     }
 }

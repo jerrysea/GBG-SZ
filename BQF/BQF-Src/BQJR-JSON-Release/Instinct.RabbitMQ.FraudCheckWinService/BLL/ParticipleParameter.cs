@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security;
 
 namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
 {
@@ -29,7 +30,7 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
             {
                 StringBuilder pcontent = new StringBuilder();
                 pcontent.AppendLine(string.Format("<Participle Type=\"{0}\" Referred_Field=\"{1}\" SequenceNumber=\"{2}\">", p.PType,p.PName,p.SequenceNumber));
-                pcontent.AppendLine(string.Format("<FullValue>{0}</FullValue>",p.FullValue));
+                pcontent.AppendLine(string.Format("<FullValue>{0}</FullValue>",SecurityElement.Escape(p.FullValue)));
                 pcontent.Append(p.XMLContent);
                 pcontent.AppendLine("</Participle>");
                 content.Append(pcontent.ToString());

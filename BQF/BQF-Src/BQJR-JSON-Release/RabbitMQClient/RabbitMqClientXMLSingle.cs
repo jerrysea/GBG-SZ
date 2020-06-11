@@ -46,6 +46,10 @@ namespace SCM.RabbitMQClient
 
         #region Instance fields
         public String EncodingName { get; set; }
+        public bool AutoAck { get; set; }
+
+        public ushort HeartBeat { get; set; }
+		
         /// <summary>
         /// RabbitMqClient 数据上下文。
         /// </summary>
@@ -283,15 +287,15 @@ namespace SCM.RabbitMQClient
                 var consumer = new EventingBasicConsumer(Context.ListenChannel); //创建事件驱动的消费者类型
                 consumer.Received += consumer_Received;
 
-                consumer.ConsumerCancelled+= (o, e) =>
-                {
-                    if (LogLocation.Log.IsNotNull())
-                        LogLocation.Log.WriteInfo("SCM.RabbitMQClient", "Consumer cancelled:" + e.ToString());
-                    ListenInit();
-                };
+                //consumer.ConsumerCancelled+= (o, e) =>
+                //{
+                //    if (LogLocation.Log.IsNotNull())
+                //        LogLocation.Log.WriteInfo("SCM.RabbitMQClient", "Consumer cancelled:" + e.ToString());
+                //    ListenInit();
+                //};
 
                 Context.ListenChannel.BasicQos(0, 1, false); //一次只获取一个消息进行消费
-                Context.ListenChannel.BasicConsume(Context.ListenQueueName, false, consumer);
+                Context.ListenChannel.BasicConsume(Context.ListenQueueName, AutoAck, consumer);
             }
             catch (Exception ex1)
             {
@@ -322,15 +326,15 @@ namespace SCM.RabbitMQClient
                     var consumer = new EventingBasicConsumer(Context.ListenChannel); //创建事件驱动的消费者类型
                     consumer.Received += consumer_Received;
 
-                    consumer.ConsumerCancelled += (o, e) =>
-                    {
-                        if (LogLocation.Log.IsNotNull())
-                            LogLocation.Log.WriteInfo("SCM.RabbitMQClient", "Consumer cancelled:" + e.ToString());
-                        ListenInit();
-                    };
+                    //consumer.ConsumerCancelled += (o, e) =>
+                    //{
+                    //    if (LogLocation.Log.IsNotNull())
+                    //        LogLocation.Log.WriteInfo("SCM.RabbitMQClient", "Consumer cancelled:" + e.ToString());
+                    //    ListenInit();
+                    //};
 
                     Context.ListenChannel.BasicQos(0, 1, false); //一次只获取一个消息进行消费
-                    Context.ListenChannel.BasicConsume(Context.ListenQueueName, false, consumer);
+                    Context.ListenChannel.BasicConsume(Context.ListenQueueName, AutoAck, consumer);
                 }
                 catch (Exception ex2)
                 {
@@ -369,7 +373,7 @@ namespace SCM.RabbitMQClient
                         };
 
                         Context.ListenChannel.BasicQos(0, 1, false); //一次只获取一个消息进行消费
-                        Context.ListenChannel.BasicConsume(Context.ListenQueueName, false, consumer);
+                        Context.ListenChannel.BasicConsume(Context.ListenQueueName, AutoAck, consumer);
                     }
                     catch (Exception ex3)
                     {
@@ -404,7 +408,7 @@ namespace SCM.RabbitMQClient
             }
             finally
             {
-                if (result != null)
+                if (result != null && !this.AutoAck)//非自动ACK
                 {
                     if (result.IsOperationOk.IsFalse())
                     {

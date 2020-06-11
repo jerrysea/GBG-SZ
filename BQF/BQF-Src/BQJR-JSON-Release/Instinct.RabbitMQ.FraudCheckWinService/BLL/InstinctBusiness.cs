@@ -167,54 +167,35 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                         }
                         //判断当前正在处理的件是否有与当前要处理的件AppKey 相同，
                         //相同，等待5分钟
-                        if (ApplicationsTrace.Instance.ContainsKey(sAppkey))
+
+                        if (!ApplicationsTrace.Instance.AddElement(sAppkey))
                         {
-                            ApplicationsTrace.Instance[sAppkey]++;
-                            if (ApplicationsTrace.Instance[sAppkey] > 150)
-                            {
-                                ApplicationsTrace.Instance.Remove(sAppkey);
-                            }
-                            else
-                            {
-                                Util.LogHelper.InfoLog(string.Format("THE FRAUD CHECKING APPLICATIONS CONTAIN THE CURREN APPLICAITON [APPKEY={0}].", sAppkey));
-                                Util.LogHelper.InfoLog(string.Format("WAIT FOR {0} SECONDS.", Util.GlobalVariable.WaitingSeconds));
-                                Task.Delay(Util.GlobalVariable.WaitingSeconds*1000);
-                                IsOperationSuccess = false;
-                                return;
-                            }
+                            Util.LogHelper.InfoLog(string.Format("THE FRAUD CHECKING APPLICATIONS CONTAIN THE CURREN APPLICAITON [APPKEY={0}].", sAppkey));
+                            Util.LogHelper.InfoLog(string.Format("WAIT FOR {0} SECONDS.", Util.GlobalVariable.WaitingSeconds));
+                            Task.Delay(Util.GlobalVariable.WaitingSeconds * 1000);
+                            IsOperationSuccess = false;
+                            return;
                         }
 
                         //xml 格式数据                        
                         //分离业务表数据与引用表数据  & 处理分词                      
-                        ReferenceXMLList = GetReferenceTableNode(sAppkey,sInput, out sInputWithOutRef);
+                        ReferenceXMLList = GetReferenceTableNode(sAppkey, sInput, out sInputWithOutRef);
                         if (ProcessXMLReferenceTableList(sAppkey, ReferenceXMLList, ref errMsg, err) && ProcessParticiple(sAppkey, pParticiple, ref errMsg, err))
                         {
+                            Util.LogHelper.InfoLog(String.Format("PROCESS TO FRAUD CHECKING APPKEY={0}--BEGIN", sAppkey));
                             try
                             {
-                                Util.LogHelper.InfoLog(String.Format("Process to fraud checking AppKey={0}--BEGIN", sAppkey));
-                                if (!ApplicationsTrace.Instance.ContainsKey(sAppkey))
-                                {
-                                    ApplicationsTrace.Instance.Add(sAppkey, 1);
-                                }
-                                try
-                                {
-                                    sOutput = this.checker.InstinctFraudCheck_XMLString(sInputWithOutRef);
-                                }
-                                catch (Exception fraudex)
-                                {
-                                    err.Error_Code = "99";
-                                    err.Remark = fraudex.Message;
-                                    sOutput = err.ToOutputSchemaString();
-                                }
-                                finally
-                                {
-                                    Util.LogHelper.InfoLog(String.Format("Process to fraud checking AppKey={0}--END", sAppkey));
-                                }
+                                sOutput = this.checker.InstinctFraudCheck_XMLString(sInputWithOutRef);
+                            }
+                            catch (Exception fraudex)
+                            {
+                                err.Error_Code = "99";
+                                err.Remark = fraudex.Message;
+                                sOutput = err.ToOutputSchemaString();
                             }
                             finally
                             {
-                                if (ApplicationsTrace.Instance.ContainsKey(sAppkey))
-                                    ApplicationsTrace.Instance.Remove(sAppkey);
+                                Util.LogHelper.InfoLog(String.Format("PROCESS TO FRAUD CHECKING APPKEY={0}--END", sAppkey));
                             }
                         }
                         else
@@ -245,54 +226,34 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                         }
                         //判断当前正在处理的件是否有与当前要处理的件AppKey 相同，
                         //相同，等待5分钟
-                        if (ApplicationsTrace.Instance.ContainsKey(sAppkey))
+                        if (!ApplicationsTrace.Instance.AddElement(sAppkey))
                         {
-                            ApplicationsTrace.Instance[sAppkey]++;
-                            if (ApplicationsTrace.Instance[sAppkey] > 150)
-                            {
-                                ApplicationsTrace.Instance.Remove(sAppkey);
-                            }
-                            else
-                            {
-                                Util.LogHelper.InfoLog(string.Format("THE FRAUD CHECKING APPLICATIONS CONTAIN THE CURREN APPLICAITON [APPKEY={0}].", sAppkey));
-                                Util.LogHelper.InfoLog(string.Format("WAIT FOR {0} SECONDS.", Util.GlobalVariable.WaitingSeconds));
-                                Task.Delay(Util.GlobalVariable.WaitingSeconds * 1000);
-                                IsOperationSuccess = false;
-                                return;
-                            }
+                            Util.LogHelper.InfoLog(string.Format("THE FRAUD CHECKING APPLICATIONS CONTAIN THE CURREN APPLICAITON [APPKEY={0}].", sAppkey));
+                            Util.LogHelper.InfoLog(string.Format("WAIT FOR {0} SECONDS.", Util.GlobalVariable.WaitingSeconds));
+                            Task.Delay(Util.GlobalVariable.WaitingSeconds * 1000);
+                            IsOperationSuccess = false;
+                            return;
                         }
 
                         //xml 格式数据
                         //分离业务表数据与引用表数据  & 处理分词                           
-                        ReferenceXMLList = GetReferenceTableNode(sAppkey,sInput, out sInputWithOutRef);
+                        ReferenceXMLList = GetReferenceTableNode(sAppkey, sInput, out sInputWithOutRef);
                         if (ProcessXMLReferenceTableList(sAppkey, ReferenceXMLList, ref errMsg, err) && ProcessParticiple(sAppkey, pParticiple, ref errMsg, err))
                         {
+                            Util.LogHelper.InfoLog(String.Format("PROCESS TO FRAUD CHECKING APPKEY={0}--BEGIN", sAppkey));
                             try
                             {
-                                Util.LogHelper.InfoLog(String.Format("Process to fraud checking AppKey={0}--BEGIN", sAppkey));
-                                if (!ApplicationsTrace.Instance.ContainsKey(sAppkey))
-                                {
-                                    ApplicationsTrace.Instance.Add(sAppkey, 1);
-                                }
-                                try
-                                {
-                                    sOutput = this.checker.InstinctFraudCheck_XMLString(sInputWithOutRef);
-                                }
-                                catch (Exception fraudex)
-                                {
-                                    err.Error_Code = "99";
-                                    err.Remark = fraudex.Message;
-                                    sOutput = err.ToOutputSchemaString();
-                                }
-                                finally
-                                {
-                                    Util.LogHelper.InfoLog(String.Format("Process to fraud checking AppKey={0}--END", sAppkey));
-                                }
+                                sOutput = this.checker.InstinctFraudCheck_XMLString(sInputWithOutRef);
+                            }
+                            catch (Exception fraudex)
+                            {
+                                err.Error_Code = "99";
+                                err.Remark = fraudex.Message;
+                                sOutput = err.ToOutputSchemaString();
                             }
                             finally
                             {
-                                if (ApplicationsTrace.Instance.ContainsKey(sAppkey))
-                                    ApplicationsTrace.Instance.Remove(sAppkey);
+                                Util.LogHelper.InfoLog(String.Format("PROCESS TO FRAUD CHECKING APPKEY={0}--END", sAppkey));
                             }
                         }
                         else
@@ -380,6 +341,7 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
             }
             finally
             {
+                ApplicationsTrace.Instance.RemoveElement(sAppkey);
                 if (IsOperationSuccess)
                     result.IsOperationOk = true; //告诉消息队列接收成功。 
             }
@@ -465,9 +427,9 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
             }
             catch (Exception ex)
             {
-                throw new Exception("Error while parsing the appkey value,error info:" + ex.ToString());
+                throw new Exception("ERROR WHILE PARSING THE APPKEY VALUE,ERROR INFO:" + ex.ToString());
             }
-            
+
             if (err != null)
             {
                 err.Organisation = sOrganisation.Trim();
@@ -505,21 +467,21 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
             }
             catch (Exception ax)
             {
-                throw new Exception("Error while parsing the appkey value,error info:" + ax.ToString());
+                throw new Exception("ERROR WHILE PARSING THE APPKEY VALUE,ERROR INFO:" + ax.ToString());
             }
             //解析分词值
-            Util.LogHelper.InfoLog(String.Format("Process to participle AppKey={0}--BEGIN", appkey));
+            Util.LogHelper.InfoLog(String.Format("PROCESS TO PARTICIPLE APPKEY={0}--BEGIN", appkey));
             try
             {
                 p = this.parse.GetValueFromInput(doc, appkey);
             }
             catch (Exception ex)
             {
-                throw new Exception("Error while parsing the participle value,error info:" + ex.ToString());
+                throw new Exception("ERROR WHILE PARSING THE PARTICIPLE VALUE,ERROR INFO:" + ex.ToString());
             }
             finally
             {
-                Util.LogHelper.InfoLog(String.Format("Process to participle AppKey={0}--END", appkey));
+                Util.LogHelper.InfoLog(String.Format("PROCESS TO PARTICIPLE APPKEY={0}--END", appkey));
             }
 
             if (err != null)
@@ -587,9 +549,9 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
         /// <param name="inputxml">输入参数</param>
         /// <param name="inputwithoutref">不带引用表数据的通用Input xml 格式</param>
         /// <returns>引用表节点</returns>
-        private XmlNodeList GetReferenceTableNode(string sAppKey,string inputxml, out string inputwithoutref)
+        private XmlNodeList GetReferenceTableNode(string sAppKey, string inputxml, out string inputwithoutref)
         {
-            Util.LogHelper.InfoLog(String.Format("Process to parse the reference node list AppKey={0}--BEGIN", sAppKey));
+            Util.LogHelper.InfoLog(String.Format("PROCESS TO PARSE THE REFERENCE NODE LIST APPKEY={0}--BEGIN", sAppKey));
             inputwithoutref = string.Empty;
 
             XmlDocument doc = Util.XMLProcess.XMLLoad(inputxml);
@@ -603,7 +565,7 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                 }
             }
             inputwithoutref = SCM.RabbitMQClient.Common.JsonXmlObjectParser.ConvertXmlToString(doc);
-            Util.LogHelper.InfoLog(String.Format("Process to parse the reference node list AppKey={0}--END", sAppKey));
+            Util.LogHelper.InfoLog(String.Format("PROCESS TO PARSE THE REFERENCE NODE LIST APPKEY={0}--END", sAppKey));
             return nodeList;
         }
         /// <summary>
@@ -706,113 +668,13 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
         /// <returns></returns>
         private bool ProcessXMLReferenceTableList(string Appkey, XmlNodeList referenceNodes, ref StringBuilder errMsg, DAL.Error err = null)
         {
-            Util.LogHelper.InfoLog(String.Format("Process to save the reference node list AppKey={0}--BEGIN", Appkey));
+            Util.LogHelper.InfoLog(String.Format("PROCESS TO SAVE THE REFERENCE NODE LIST APPKEY={0}--BEGIN", Appkey));
             bool bRet = true;
-            DataSet referenceDSList = new DataSet();
 
-            //处理的Reference IDs
-            ArrayList referTableIDs = null;
-
-            //如果引用表节点为空，不处理，直接返回成功。
-            if (referenceNodes != null && referenceNodes.Count > 0)
-            {
-                //收集数据，放入Dataset [referenceDSList]中
-                for (int i = 0; i < referenceNodes.Count; i++)
-                {
-                    XmlNode refItem = referenceNodes[i];
-
-                    int tableid = -1;
-                    if (refItem.Attributes["TableID"] == null)
-                    {
-                        //错误代码101
-                        if (err != null)
-                        {
-                            err.Error_Code = "101";
-                        }
-                        errMsg.Append("A REFERENCE XML NODE HAS NO TABLE ID. \n");
-                        bRet = false;
-                        break;
-                    }
-                    if (refItem.Attributes["TableID"].Value == "" || !Util.Tool.IsNumberic(refItem.Attributes["TableID"].Value))
-                    {
-                        //错误代码102
-                        if (err != null)
-                        {
-                            err.Error_Code = "102";
-                        }
-                        errMsg.Append("A REFERENCE XML NODE 's TABLE ID IS NOT NUMERIC. \n");
-                        bRet = false;
-                        break;
-                    }
-
-                    tableid = Convert.ToInt32(refItem.Attributes["TableID"].Value);
-
-                    DAL.ReferenceTable refAtt = GetReferenceSettingObj(tableid);
-
-                    if (refAtt == null)
-                    {
-                        //错误代码103
-                        if (err != null)
-                        {
-                            err.Error_Code = "103";
-                        }
-                        errMsg.Append(string.Format("THE REFERENCE TABLE[{0}] ATTRIBUTES IS NOT FOUND.\n", tableid));
-                        bRet = false;
-                        break;
-                    }
-                    if (!refAtt.Columns.ContainsKey(APPKEY))
-                    {
-                        //错误代码104
-                        if (err != null)
-                        {
-                            err.Error_Code = "104";
-                        }
-                        errMsg.Append(string.Format("THE REFERENCE TABLE[{0}] ATTRIBUTES HAS NOT APPKEY COLUMN.\n", tableid));
-                        bRet = false;
-                        break;
-                    }
-
-                    bRet = ValidateAndFormatReferenceTableNode(ref refItem, refAtt, ref errMsg);
-
-                    if (!bRet)
-                    {
-                        //错误代码105 验证数据出错
-                        if (err != null)
-                        {
-                            err.Error_Code = "105";
-                        }
-                        break;
-                    }
-
-                    DataTable refTable = GetDTByRID(ref referenceDSList, tableid, refAtt);
-                    AddDataToTable(Appkey, refItem, ref refTable);                    
-                }
-
-                //更新数据库
-                if (bRet && referenceDSList != null && referenceDSList.Tables.Count > 0)
-                {
-                    try
-                    {
-                        referTableIDs = BulkSaveReferenceData(Appkey, referenceDSList);
-                    }
-                    catch (Exception ex)
-                    {
-                        bRet = false;
-                        //错误代码106 加载数据出错
-                        if (err != null)
-                        {
-                            err.Error_Code = "106";
-                        }
-                        errMsg.Append(string.Format("FAIL TO LOAD REFERENCE DATA[APPKEY={0}]，ERROR MESSAGE：{1}", Appkey, ex.Message));
-                    }
-                }
-            }
-
-            //清理Appkey相关引用表，不在上面逻辑的引用表数据
+            //清理Appkey相关引用表
             try
             {
-                ArrayList referTableIdsNoUp = getReferenceIDsForClear(referTableIDs);
-                clearReferenceData(referTableIdsNoUp, Appkey);
+                clearReferenceData(Appkey);
             }
             catch (Exception ex)
             {
@@ -825,7 +687,32 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                 errMsg.Append(string.Format("FAIL TO CLEAR REFERENCE DATA[APPKEY={0}]，ERROR MESSAGE：{1}", Appkey, ex.Message));
 
             }
-            Util.LogHelper.InfoLog(String.Format("Process to save the reference node list AppKey={0}--END", Appkey));
+
+            DataSet referenceDSList = null;
+            //验证Reference Nodes
+            bRet = ValidateReferenceTable(Appkey, referenceNodes, ref errMsg, out referenceDSList, ref err);
+
+            //更新数据库
+            if (bRet && referenceDSList != null && referenceDSList.Tables.Count > 0)
+            {
+                try
+                {
+                    //BulkSaveReferenceData(Appkey, referenceDSList);
+                    BulkInsertReferenceData(Appkey, referenceDSList);
+                }
+                catch (Exception ex)
+                {
+                    bRet = false;
+                    //错误代码106 加载数据出错
+                    if (err != null)
+                    {
+                        err.Error_Code = "106";
+                    }
+                    errMsg.Append(string.Format("FAIL TO LOAD REFERENCE DATA[APPKEY={0}]，ERROR MESSAGE：{1}", Appkey, ex.Message));
+                }
+            }            
+
+            Util.LogHelper.InfoLog(String.Format("PROCESS TO SAVE THE REFERENCE NODE LIST APPKEY={0}--END", Appkey));
             return bRet;
         }
         /// <summary>
@@ -925,6 +812,130 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
             }
             return tableids;
         }
+
+        /// <summary>
+        /// 批量导入数据库
+        /// </summary>
+        /// <param name="AppKey"></param>
+        /// <param name="ds"></param>
+        /// <param name="errMsg"></param>
+        /// <returns></returns>
+        private void BulkInsertReferenceData(string AppKey, DataSet ds)
+        {            
+            try
+            {
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    foreach (DataTable dt in ds.Tables)
+                    {
+                        string tablename = dt.TableName;
+                        int tableID = Convert.ToInt32(tablename.Substring(1));
+                        string stagingname = GetTableStagingName(tableID);
+                        string dbtablename = GetDbTableName(tableID);
+
+                        if (Util.GlobalVariable.BReferenceSynonyms)
+                        {
+                            SetSynonymsNames(tableID, ref stagingname, ref dbtablename);
+                        }
+
+                        DAL.ReferenceTable attdt = this.ReferenceHistory[tableID];
+                       
+                        ArrayList field_list = GetFieldsArrayFromTableAttributes(attdt);
+
+                        DAL.ReferenceTableDAL.InsertReferenceData(dt, dbtablename, field_list, AppKey);
+                        
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }           
+        }
+
+        private bool ValidateReferenceTable(string Appkey ,XmlNodeList referenceNodes, ref StringBuilder errMsg,out DataSet referenceDSList,ref DAL.Error err)
+        {
+            bool bRet = true;
+
+            referenceDSList = new DataSet();           
+
+            //如果引用表节点为空，不处理，直接返回成功。
+            if (referenceNodes != null && referenceNodes.Count > 0)
+            {
+                //收集数据，放入Dataset [referenceDSList]中
+                for (int i = 0; i < referenceNodes.Count; i++)
+                {
+                    XmlNode refItem = referenceNodes[i];
+
+                    int tableid = -1;
+                    if (refItem.Attributes["TableID"] == null)
+                    {
+                        //错误代码101
+                        if (err != null)
+                        {
+                            err.Error_Code = "101";
+                        }
+                        errMsg.Append("A REFERENCE XML NODE HAS NO TABLE ID. \n");
+                        bRet = false;
+                        break;
+                    }
+                    if (refItem.Attributes["TableID"].Value == "" || !Util.Tool.IsNumberic(refItem.Attributes["TableID"].Value))
+                    {
+                        //错误代码102
+                        if (err != null)
+                        {
+                            err.Error_Code = "102";
+                        }
+                        errMsg.Append("A REFERENCE XML NODE 's TABLE ID IS NOT NUMERIC. \n");
+                        bRet = false;
+                        break;
+                    }
+
+                    tableid = Convert.ToInt32(refItem.Attributes["TableID"].Value);
+
+                    DAL.ReferenceTable refAtt = GetReferenceSettingObj(tableid);
+
+                    if (refAtt == null)
+                    {
+                        //错误代码103
+                        if (err != null)
+                        {
+                            err.Error_Code = "103";
+                        }
+                        errMsg.Append(string.Format("THE REFERENCE TABLE[{0}] ATTRIBUTES IS NOT FOUND.\n", tableid));
+                        bRet = false;
+                        break;
+                    }
+                    if (!refAtt.Columns.ContainsKey(APPKEY))
+                    {
+                        //错误代码104
+                        if (err != null)
+                        {
+                            err.Error_Code = "104";
+                        }
+                        errMsg.Append(string.Format("THE REFERENCE TABLE[{0}] ATTRIBUTES HAS NOT APPKEY COLUMN.\n", tableid));
+                        bRet = false;
+                        break;
+                    }
+
+                    bRet = ValidateAndFormatReferenceTableNode(ref refItem, refAtt, ref errMsg);
+
+                    if (!bRet)
+                    {
+                        //错误代码105 验证数据出错
+                        if (err != null)
+                        {
+                            err.Error_Code = "105";
+                        }
+                        break;
+                    }
+
+                    DataTable refTable = GetDTByRID(ref referenceDSList, tableid, refAtt);
+                    AddDataToTable(Appkey, refItem, ref refTable);
+                }                
+            }
+            return bRet;
+        }
         /// <summary>
         /// 获取临时引用表名
         /// </summary>
@@ -958,8 +969,8 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
             {
                 foreach (DataRow row in dt.Rows)
                 {
-                    string sname = row["name"].ToString();
-                    string sbase_object_name = row["base_object_name"].ToString();
+                    string sname = row["NAME"].ToString();
+                    string sbase_object_name = row["BASE_OBJECT_NAME"].ToString();
                     if (sname.Trim().ToUpper().EndsWith("STAGING"))
                     {
                         stagingTab = sbase_object_name;
@@ -987,6 +998,20 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                 sb.Append(",");
             }
             return sb.ToString().TrimEnd(',');
+        }
+        /// <summary>
+        /// 获取插入字段
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        private ArrayList GetFieldsArrayFromTableAttributes(DAL.ReferenceTable tab)
+        {
+            ArrayList al = new ArrayList();
+            foreach (string key in tab.Columns.Keys)
+            {
+                al.Add(key);                
+            }
+            return al;
         }
         /// <summary>
         /// 获取无更新引用表IDs
@@ -1041,6 +1066,35 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                 }
             }
         }
+        /// <summary>
+        /// 清理Appkey 相关引用表数据
+        /// </summary>
+        /// <param name="referIdsCopy"></param>
+        /// <param name="appkey"></param>
+        private void clearReferenceData(string appkey)
+        {
+            ArrayList referTableList = new ArrayList();
+            if (Util.GlobalVariable.ReferenceTables != null && Util.GlobalVariable.ReferenceTables.Count > 0)
+            {
+                foreach (string id in Util.GlobalVariable.ReferenceTables)
+                {
+                    int tableID = Convert.ToInt32(id);
+                    string stagingname = GetTableStagingName(tableID);
+                    string dbtablename = GetDbTableName(tableID);
+
+                    if (Util.GlobalVariable.BReferenceSynonyms)
+                    {
+                        SetSynonymsNames(tableID, ref stagingname, ref dbtablename);
+                    }
+                    referTableList.Add(dbtablename);
+                }
+
+                if (referTableList != null && referTableList.Count > 0)
+                {
+                    DAL.ReferenceTableDAL.DeleteReferenceData(referTableList, appkey);
+                }
+            }
+        }
         #endregion
 
         #region Participle 相关
@@ -1057,7 +1111,7 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
             bool bRet = true;
             if (Util.GlobalVariable.BParticiple)
             {
-                Util.LogHelper.InfoLog(String.Format("Process to save the participial data AppKey={0}--BEGIN", Appkey));
+                Util.LogHelper.InfoLog(String.Format("PROCESS TO SAVE THE PARTICIPIAL DATA APPKEY={0}--BEGIN", Appkey));
                 try
                 {
                     string sxml = pParticiple.ToXML();
@@ -1070,13 +1124,13 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                     if (err != null)
                     {
                         err.Error_Code = "200";
-                        err.Remark = "The segmentation  data of the Application\"{0}\" fail to save.";
+                        err.Remark = "THE SEGMENTATION  DATA OF THE APPLICATION\"{0}\" FAIL TO SAVE.";
                     }
                     errMsg.Append(string.Format("FAIL TO PROCESS PARTICIPLE ENTITY DATA[APPKEY={0}],ERROR MESSAGE：{1}", Appkey, ex.Message));
                 }
                 finally
                 {
-                    Util.LogHelper.InfoLog(String.Format("Process to save the participial data AppKey={0}--END", Appkey));
+                    Util.LogHelper.InfoLog(String.Format("PROCESS TO SAVE THE PARTICIPIAL DATA APPKEY={0}--END", Appkey));
                 }
             }
             return bRet;

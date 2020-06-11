@@ -22,11 +22,16 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
         {
             get
             {
-                // Syn operation.
-                lock (SynObject)
+                if (_instance == null)
                 {
-                    return _instance ?? (_instance = new ApplicationsTrace());
+                    // Syn operation.
+                    lock (SynObject)
+                    {
+                        if (_instance == null)
+                            _instance = new ApplicationsTrace();
+                    }
                 }
+                return _instance;                
             }
         }
 

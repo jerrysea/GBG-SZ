@@ -24,9 +24,8 @@ namespace Instinct.RabbitMQ.FraudCheckService.DAL
         #region 构造
         public InstinctFraudCheckThread(ClsOnlineServiceCall.SetINIValue value,ClsOnlineServiceCall.InstinctServiceOnline.dlgWriteIISLong dlg)
         {
-            this.clsSetINIValue = value;//new ClsOnlineServiceCall.SetINIValue();
+            this.clsSetINIValue = value;            
             
-            //SetConfigValues(ref this.clsSetINIValue);
             this.LogMSG = dlg;
         }
         #endregion
@@ -39,17 +38,7 @@ namespace Instinct.RabbitMQ.FraudCheckService.DAL
         /// <returns></returns>
         public string InstinctFraudCheck_String(string inputString)
         {
-
-            ClsOnlineServiceCall.InstinctServiceOnline clsOnlineCall = default(ClsOnlineServiceCall.InstinctServiceOnline);
-
-            //********************* Hugh Start 22/02/2011,TFS 6452 (1.2.3 - Parameterise Field Retention - Online Service) *********************************'
-            //The selected fields should be retained upon criminal replacement
-            //(New Function) To copy the old value back if possibel
-            //For InstinctFraudCheck_String, the USP_Common_Applications_Add called by
-            //   USP_Common_Applications_LoadAndFraudCheck, USP_Common_Applications_Add also called by batch servcie I file function.
-            //**************************************************************************************************************************************************
-
-            clsOnlineCall = new ClsOnlineServiceCall.InstinctServiceOnline(inputString.Trim(), LogMSG);
+            ClsOnlineServiceCall.InstinctServiceOnline clsOnlineCall = new ClsOnlineServiceCall.InstinctServiceOnline(inputString.Trim(), LogMSG);
             return clsOnlineCall.GetOutputStr;
         }
         /// <summary>
@@ -60,8 +49,7 @@ namespace Instinct.RabbitMQ.FraudCheckService.DAL
         public string InstinctFraudCheck_XMLString(string inputXMLString)
         {
 
-            ClassXMLParse.ClsXMLParse clsParse = default(ClassXMLParse.ClsXMLParse);
-            //ClsOnlineServiceCall.SetINIValue clsSetINIValue = default(ClsOnlineServiceCall.SetINIValue);
+            ClassXMLParse.ClsXMLParse clsParse = default(ClassXMLParse.ClsXMLParse);           
             ClsOnlineServiceCall.InstinctServiceOnline clsOnlineCall = default(ClsOnlineServiceCall.InstinctServiceOnline);
             bool bOutputUser = default(bool);
             bool bOutputRules = default(bool);
@@ -74,18 +62,7 @@ namespace Instinct.RabbitMQ.FraudCheckService.DAL
             bool bOutputFraudAlertUserId = default(bool);
             string sInputString = "";
 
-            clsParse = new ClassXMLParse.ClsXMLParse();
-            //clsSetINIValue = new ClsOnlineServiceCall.SetINIValue();
-            //SetConfigValues(ref clsSetINIValue);
-
-            //********************* Hugh Start 22/02/2011,TFS 6452 (1.2.3 - Parameterise Field Retention - Online Service) *********************************'
-            //The selected fields should be retained upon criminal replacement
-            //(New Function) To copy the old value back if possibel
-            //For InstinctFraudCheck_XMLString, the USP_Common_Applications_Add called by
-            //   USP_Common_Applications_LoadAndFraudCheck, USP_Common_Applications_Add also called by batch servcie I file function.
-            //**************************************************************************************************************************************************
-
-            //Rumesh MM 23-04-2013 to workwith HLB custom Input string format
+            clsParse = new ClassXMLParse.ClsXMLParse();            
             if (clsSetINIValue.SiteWithSpecialFunctions == "HLB")
             {
                 sInputString = System.Convert.ToString(clsParse.GetInstinctInputStringForSpecificSite(inputXMLString, "HLB"));
@@ -180,7 +157,7 @@ namespace Instinct.RabbitMQ.FraudCheckService.DAL
 
             clsParse.TriggeredRulesDefinitions = clsOnlineCall.TriggeredRulesDefinitions;
 
-            return clsParse.GetOutputXMLString(clsOnlineCall.GetOutputStr, bOutputUser, bOutputRules, bOutputRulesDescription, bOutputDecisionReason, bOutputUserDefinedAlert, bOutputActionCountNumber, bOutputNatureOfFraud, bOutputDiary, clsSetINIValue.SiteWithSpecialFunctions, bOutputFraudAlertUserId);
+            return clsParse.GetOutputXMLString(clsOnlineCall.GetOutputStr, bOutputUser, bOutputRules, bOutputRulesDescription, bOutputDecisionReason, bOutputUserDefinedAlert, bOutputActionCountNumber, bOutputNatureOfFraud, bOutputDiary, clsSetINIValue.SiteWithSpecialFunctions);
         }
         /// <summary>
         /// 提交最终判定接口
