@@ -199,7 +199,7 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.DAL
         public static void InsertReferenceData(DataTable dt, string table, ArrayList fields, string appkey)
         {
             StringBuilder sbSql = new StringBuilder();
-            string template ="INSERT INTO [DBO].[{0}] WITH(ROWLOCK) ({1}) VALUES({2})";
+            string template = "INSERT INTO [DBO].[{0}] WITH(ROWLOCK) ({1}) VALUES({2});";
             if (dt != null && dt.Rows.Count > 0 && fields!=null && fields.Count>0)
             {
                 foreach (DataRow row in dt.Rows)
