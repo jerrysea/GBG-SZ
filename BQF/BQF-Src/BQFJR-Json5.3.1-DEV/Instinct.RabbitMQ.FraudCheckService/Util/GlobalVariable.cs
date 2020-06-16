@@ -29,7 +29,7 @@ namespace Instinct.RabbitMQ.FraudCheckService.Util
         public static string CnnString { get; set; }
         public static bool MqNeedDeclareQueue { get; set; }
         public static bool MqSynchronization { get; set; }
-        public static bool BReferenceSynonyms { get; set; }
+        //public static bool BReferenceSynonyms { get; set; }
         public static ArrayList ReferenceTables { get; set; }
         public static bool BParticiple { get; set; }
         public static int WaitingSeconds { get; set; }

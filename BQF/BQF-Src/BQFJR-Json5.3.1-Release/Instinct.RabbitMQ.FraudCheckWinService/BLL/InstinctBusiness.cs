@@ -674,7 +674,9 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
             //清理Appkey相关引用表
             try
             {
+                Util.LogHelper.InfoLog("START TO CLEAR REFERENCE DATA LIST");
                 clearReferenceData(Appkey);
+                Util.LogHelper.InfoLog("END TO CLEAR REFERENCE DATA LIST");
             }
             catch (Exception ex)
             {
@@ -690,7 +692,9 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
 
             DataSet referenceDSList = null;
             //验证Reference Nodes
+            Util.LogHelper.InfoLog("START TO VALIDATE REFERENCE DATA LIST");
             bRet = ValidateReferenceTable(Appkey, referenceNodes, ref errMsg, out referenceDSList, ref err);
+            Util.LogHelper.InfoLog("END TO VALIDATE REFERENCE DATA LIST");
 
             //更新数据库
             if (bRet && referenceDSList != null && referenceDSList.Tables.Count > 0)
@@ -698,7 +702,9 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                 try
                 {
                     //BulkSaveReferenceData(Appkey, referenceDSList);
+                    Util.LogHelper.InfoLog("START TO SAVE REFERENCE DATA LIST");
                     BulkInsertReferenceData(Appkey, referenceDSList);
+                    Util.LogHelper.InfoLog("END TO SAVE REFERENCE DATA LIST");
                 }
                 catch (Exception ex)
                 {

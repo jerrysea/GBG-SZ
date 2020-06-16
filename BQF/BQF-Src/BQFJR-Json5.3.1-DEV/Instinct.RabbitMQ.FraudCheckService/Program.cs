@@ -92,7 +92,7 @@ namespace Instinct.RabbitMQ.FraudCheckService
             Util.GlobalVariable.MqEncoding  = EncodeName;
             Util.GlobalVariable.MqNeedDeclareQueue = System.Configuration.ConfigurationManager.AppSettings["MqNeedDeclareQueue"] != null && System.Configuration.ConfigurationManager.AppSettings["MqNeedDeclareQueue"].ToString().ToUpper()=="TRUE"?true :false ;
             Util.GlobalVariable.MqSynchronization = System.Configuration.ConfigurationManager.AppSettings["MqSynchronization"] != null && System.Configuration.ConfigurationManager.AppSettings["MqSynchronization"].ToString().ToUpper() == "TRUE" ? true : false;
-            Util.GlobalVariable.BReferenceSynonyms = System.Configuration.ConfigurationManager.AppSettings["ReferenceSynonyms"] != null && System.Configuration.ConfigurationManager.AppSettings["ReferenceSynonyms"].ToString().ToUpper() == "TRUE" ? true : false;
+            //Util.GlobalVariable.BReferenceSynonyms = System.Configuration.ConfigurationManager.AppSettings["ReferenceSynonyms"] != null && System.Configuration.ConfigurationManager.AppSettings["ReferenceSynonyms"].ToString().ToUpper() == "TRUE" ? true : false;
 
             string sReferenceTables= System.Configuration.ConfigurationManager.AppSettings["ReferenceTables"]==null?"": System.Configuration.ConfigurationManager.AppSettings["ReferenceTables"];
             if (sReferenceTables != "")
