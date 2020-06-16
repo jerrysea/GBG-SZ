@@ -1,0 +1,4 @@
+可以只更新下列文件
+Instinct.RabbitMQ.FraudCheckWinService.exe
+Instinct.RabbitMQ.FraudCheckWinService.exe.config
+SCM.RabbitMQClient.dll
