@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FraudCheckService", "FraudCheckService", "{C388F69A-B358-4F0E-9D8E-12B198B65695}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetFramework.CAP", "..\DotNetFramework.CAP\DotNetFramework.CAP.csproj", "{7038C4B7-AB29-4BBC-A645-7518AC468DBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetFramework.CAP.RabbitMQ", "..\DotNetFramework.CAP.RabbitMQ\DotNetFramework.CAP.RabbitMQ.csproj", "{3BF1F1D0-5E46-4A5D-9714-92AF1FC30D61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetFramework.CAP.SqlServer", "..\DotNetFramework.CAP.SqlServer\DotNetFramework.CAP.SqlServer.csproj", "{BF248616-F4D5-47B5-99CF-D0C4650BB6B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CAP", "CAP", "{406C795B-6546-4CD4-A61E-561C7CA89A63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Instinct.CAP.FraudCheckService", "Instinct.CAP.FraudCheckService.csproj", "{6E3780ED-9AF2-425E-83CC-4C96637C461A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7038C4B7-AB29-4BBC-A645-7518AC468DBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7038C4B7-AB29-4BBC-A645-7518AC468DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7038C4B7-AB29-4BBC-A645-7518AC468DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7038C4B7-AB29-4BBC-A645-7518AC468DBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BF1F1D0-5E46-4A5D-9714-92AF1FC30D61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BF1F1D0-5E46-4A5D-9714-92AF1FC30D61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BF1F1D0-5E46-4A5D-9714-92AF1FC30D61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BF1F1D0-5E46-4A5D-9714-92AF1FC30D61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF248616-F4D5-47B5-99CF-D0C4650BB6B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF248616-F4D5-47B5-99CF-D0C4650BB6B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF248616-F4D5-47B5-99CF-D0C4650BB6B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF248616-F4D5-47B5-99CF-D0C4650BB6B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E3780ED-9AF2-425E-83CC-4C96637C461A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E3780ED-9AF2-425E-83CC-4C96637C461A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E3780ED-9AF2-425E-83CC-4C96637C461A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E3780ED-9AF2-425E-83CC-4C96637C461A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7038C4B7-AB29-4BBC-A645-7518AC468DBE} = {406C795B-6546-4CD4-A61E-561C7CA89A63}
+		{3BF1F1D0-5E46-4A5D-9714-92AF1FC30D61} = {406C795B-6546-4CD4-A61E-561C7CA89A63}
+		{BF248616-F4D5-47B5-99CF-D0C4650BB6B2} = {406C795B-6546-4CD4-A61E-561C7CA89A63}
+		{6E3780ED-9AF2-425E-83CC-4C96637C461A} = {C388F69A-B358-4F0E-9D8E-12B198B65695}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CDCAFF9F-7CE5-4E4D-8668-016A4ABB47D0}
+	EndGlobalSection
+EndGlobal
