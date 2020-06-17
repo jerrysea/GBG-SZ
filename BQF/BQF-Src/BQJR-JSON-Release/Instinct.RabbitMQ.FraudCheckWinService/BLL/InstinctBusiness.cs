@@ -32,7 +32,10 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
         public BuildClient ReceiverClient { get; set; }
 
         private static readonly object SynObject = new object();
-        public Dictionary<int, DAL.ReferenceTable> ReferenceHistory { get; set; }
+        public Dictionary<int, DAL.ReferenceTable> ReferenceHistory { get; }
+
+        private static readonly object SynObjectTab = new object();
+        public Dictionary<int, String> ReferenceTabDbHistory { get; }
 
         public const string APPKEY = "AppKey";
 
@@ -65,6 +68,7 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
             checker = new DAL.InstinctFraudCheckThread(this.ConfigObj, Util.LogHelper.ErrorLog);
 
             ReferenceHistory = new Dictionary<int, DAL.ReferenceTable>();
+            ReferenceTabDbHistory = new Dictionary<int, string>();
             //加分词
             if (Util.GlobalVariable.BParticiple)
             {
@@ -660,6 +664,27 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                 }
             }
         }
+
+        private String GetReferenceTabNameObj(int RID)
+        {
+            // Syn operation.
+            lock (SynObjectTab)
+            {
+                if (ReferenceTabDbHistory.ContainsKey(RID))
+                {
+                    return ReferenceTabDbHistory[RID];
+                }
+                else
+                {
+                    string stagingTab = string.Empty;
+                    string dbTab = string.Empty;
+                    SetSynonymsNames(RID, ref stagingTab, ref dbTab);
+                    if (dbTab != null)
+                        ReferenceTabDbHistory.Add(RID, dbTab);
+                    return dbTab;
+                }
+            }
+        }
         /// <summary>
         /// 处理引用表节点总入口
         /// </summary>
@@ -671,10 +696,19 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
             Util.LogHelper.InfoLog(String.Format("PROCESS TO SAVE THE REFERENCE NODE LIST APPKEY={0}--BEGIN", Appkey));
             bool bRet = true;
 
+            DataSet referenceDSList = null;
+            ArrayList dbTabArray = null;
+            //验证Reference Nodes
+            Util.LogHelper.DebugLog(String.Format("PROCESS TO VALIDATE THE REFERENCE NODE LIST APPKEY={0}--BEGIN", Appkey));
+            bRet = ValidateReferenceTable(Appkey, referenceNodes, ref errMsg, out referenceDSList, out dbTabArray, ref err);
+            Util.LogHelper.DebugLog(String.Format("PROCESS TO VALIDATE THE REFERENCE NODE LIST APPKEY={0}--END", Appkey));
+
             //清理Appkey相关引用表
             try
             {
-                clearReferenceData(Appkey);
+                Util.LogHelper.DebugLog(String.Format("PROCESS TO CLEAR THE REFERENCE DB DATA APPKEY={0}--BEGIN", Appkey));
+                ClearReferenceData(Appkey, dbTabArray);
+                Util.LogHelper.DebugLog(String.Format("PROCESS TO CLEAR THE REFERENCE DB DATA APPKEY={0}--END", Appkey));
             }
             catch (Exception ex)
             {
@@ -688,17 +722,15 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
 
             }
 
-            DataSet referenceDSList = null;
-            //验证Reference Nodes
-            bRet = ValidateReferenceTable(Appkey, referenceNodes, ref errMsg, out referenceDSList, ref err);
-
             //更新数据库
             if (bRet && referenceDSList != null && referenceDSList.Tables.Count > 0)
             {
                 try
                 {
+                    Util.LogHelper.DebugLog(String.Format("PROCESS TO SAVE THE REFERENCE DATA APPKEY={0}--BEGIN", Appkey));
                     //BulkSaveReferenceData(Appkey, referenceDSList);
                     BulkInsertReferenceData(Appkey, referenceDSList);
+                    Util.LogHelper.DebugLog(String.Format("PROCESS TO SAVE THE REFERENCE DATA APPKEY={0}--END", Appkey));
                 }
                 catch (Exception ex)
                 {
@@ -710,7 +742,7 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                     }
                     errMsg.Append(string.Format("FAIL TO LOAD REFERENCE DATA[APPKEY={0}]，ERROR MESSAGE：{1}", Appkey, ex.Message));
                 }
-            }            
+            }
 
             Util.LogHelper.InfoLog(String.Format("PROCESS TO SAVE THE REFERENCE NODE LIST APPKEY={0}--END", Appkey));
             return bRet;
@@ -762,56 +794,56 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
             dt.Rows.Add(row);
         }
 
-        /// <summary>
-        /// 批量导入数据库
-        /// </summary>
-        /// <param name="AppKey"></param>
-        /// <param name="ds"></param>
-        /// <param name="errMsg"></param>
-        /// <returns></returns>
-        private ArrayList BulkSaveReferenceData(string AppKey, DataSet ds)
-        {
-            ArrayList tableids = new ArrayList();
-            try
-            {
-                if (ds != null && ds.Tables.Count > 0)
-                {
-                    foreach (DataTable dt in ds.Tables)
-                    {
-                        string tablename = dt.TableName;
-                        int tableID = Convert.ToInt32(tablename.Substring(1));
-                        string stagingname = GetTableStagingName(tableID);
-                        string dbtablename = GetDbTableName(tableID);
+        ///// <summary>
+        ///// 批量导入数据库
+        ///// </summary>
+        ///// <param name="AppKey"></param>
+        ///// <param name="ds"></param>
+        ///// <param name="errMsg"></param>
+        ///// <returns></returns>
+        //private ArrayList BulkSaveReferenceData(string AppKey, DataSet ds)
+        //{
+        //    ArrayList tableids = new ArrayList();
+        //    try
+        //    {
+        //        if (ds != null && ds.Tables.Count > 0)
+        //        {
+        //            foreach (DataTable dt in ds.Tables)
+        //            {
+        //                string tablename = dt.TableName;
+        //                int tableID = Convert.ToInt32(tablename.Substring(1));
+        //                string stagingname = GetTableStagingName(tableID);
+        //                string dbtablename = GetDbTableName(tableID);
 
-                        if (Util.GlobalVariable.BReferenceSynonyms)
-                        {
-                            SetSynonymsNames(tableID, ref stagingname, ref dbtablename);
-                        }
+        //                if (Util.GlobalVariable.BReferenceSynonyms)
+        //                {
+        //                    SetSynonymsNames(tableID, ref stagingname, ref dbtablename);
+        //                }
 
-                        Util.SqlHelper.BulkInsert(Util.GlobalVariable.CnnString, dt, stagingname);
+        //                Util.SqlHelper.BulkInsert(Util.GlobalVariable.CnnString, dt, stagingname);
 
-                        DAL.ReferenceTable attdt = this.ReferenceHistory[tableID];
+        //                DAL.ReferenceTable attdt = this.ReferenceHistory[tableID];
 
-                        string fields = GetFieldsFromTableAttributes(attdt);
+        //                string fields = GetFieldsFromTableAttributes(attdt);
 
-                        DAL.ReferenceTableDAL.CopyDataFromStagingTable(stagingname, dbtablename, fields, AppKey);
-                        //由于数据读写频繁，下面操作会死锁表
-                        //DAL.ReferenceTableDAL.ApplyCalculations(tableID, transaction);
+        //                DAL.ReferenceTableDAL.CopyDataFromStagingTable(stagingname, dbtablename, fields, AppKey);
+        //                //由于数据读写频繁，下面操作会死锁表
+        //                //DAL.ReferenceTableDAL.ApplyCalculations(tableID, transaction);
 
-                        //获取引用表id
-                        if (!tableids.Contains(tableID.ToString()))
-                        {
-                            tableids.Add(tableID.ToString());
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return tableids;
-        }
+        //                //获取引用表id
+        //                if (!tableids.Contains(tableID.ToString()))
+        //                {
+        //                    tableids.Add(tableID.ToString());
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    return tableids;
+        //}
 
         /// <summary>
         /// 批量导入数据库
@@ -821,7 +853,7 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
         /// <param name="errMsg"></param>
         /// <returns></returns>
         private void BulkInsertReferenceData(string AppKey, DataSet ds)
-        {            
+        {
             try
             {
                 if (ds != null && ds.Tables.Count > 0)
@@ -830,34 +862,29 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                     {
                         string tablename = dt.TableName;
                         int tableID = Convert.ToInt32(tablename.Substring(1));
-                        string stagingname = GetTableStagingName(tableID);
-                        string dbtablename = GetDbTableName(tableID);
-
-                        if (Util.GlobalVariable.BReferenceSynonyms)
-                        {
-                            SetSynonymsNames(tableID, ref stagingname, ref dbtablename);
-                        }
+                        string dbtablename = GetReferenceTabNameObj(tableID);
 
                         DAL.ReferenceTable attdt = this.ReferenceHistory[tableID];
-                       
+
                         ArrayList field_list = GetFieldsArrayFromTableAttributes(attdt);
 
                         DAL.ReferenceTableDAL.InsertReferenceData(dt, dbtablename, field_list, AppKey);
-                        
+
                     }
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
-            }           
+            }
         }
 
-        private bool ValidateReferenceTable(string Appkey ,XmlNodeList referenceNodes, ref StringBuilder errMsg,out DataSet referenceDSList,ref DAL.Error err)
+        private bool ValidateReferenceTable(string Appkey, XmlNodeList referenceNodes, ref StringBuilder errMsg, out DataSet referenceDSList, out ArrayList dbTabIds, ref DAL.Error err)
         {
             bool bRet = true;
 
-            referenceDSList = new DataSet();           
+            referenceDSList = new DataSet();
+            dbTabIds = new ArrayList();
 
             //如果引用表节点为空，不处理，直接返回成功。
             if (referenceNodes != null && referenceNodes.Count > 0)
@@ -892,7 +919,11 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                     }
 
                     tableid = Convert.ToInt32(refItem.Attributes["TableID"].Value);
-
+                    string sdbTabId = GetReferenceTabNameObj(tableid);
+                    if (!dbTabIds.Contains(sdbTabId))
+                    {
+                        dbTabIds.Add(sdbTabId);
+                    }
                     DAL.ReferenceTable refAtt = GetReferenceSettingObj(tableid);
 
                     if (refAtt == null)
@@ -932,28 +963,28 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
 
                     DataTable refTable = GetDTByRID(ref referenceDSList, tableid, refAtt);
                     AddDataToTable(Appkey, refItem, ref refTable);
-                }                
+                }
             }
             return bRet;
         }
-        /// <summary>
-        /// 获取临时引用表名
-        /// </summary>
-        /// <param name="RID"></param>
-        /// <returns></returns>
-        private string GetTableStagingName(int RID)
-        {
-            return "R_" + RID.ToString("00") + "_B";
-        }
-        /// <summary>
-        /// 获取引用表名
-        /// </summary>
-        /// <param name="RID"></param>
-        /// <returns></returns>
-        private string GetDbTableName(int RID)
-        {
-            return "R_" + RID.ToString("00") + "_A";
-        }
+        ///// <summary>
+        ///// 获取临时引用表名
+        ///// </summary>
+        ///// <param name="RID"></param>
+        ///// <returns></returns>
+        //private string GetTableStagingName(int RID)
+        //{
+        //    return "R_" + RID.ToString("00") + "_B";
+        //}
+        ///// <summary>
+        ///// 获取引用表名
+        ///// </summary>
+        ///// <param name="RID"></param>
+        ///// <returns></returns>
+        //private string GetDbTableName(int RID)
+        //{
+        //    return "R_" + RID.ToString("00") + "_A";
+        //}
         /// <summary>
         /// 
         /// </summary>
@@ -982,23 +1013,23 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                 }
             }
         }
-        /// <summary>
-        /// 获取插入字段
-        /// </summary>
-        /// <param name="dt"></param>
-        /// <returns></returns>
-        private string GetFieldsFromTableAttributes(DAL.ReferenceTable tab)
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (string key in tab.Columns.Keys)
-            {
-                sb.Append("[");
-                sb.Append(key);
-                sb.Append("]");
-                sb.Append(",");
-            }
-            return sb.ToString().TrimEnd(',');
-        }
+        ///// <summary>
+        ///// 获取插入字段
+        ///// </summary>
+        ///// <param name="dt"></param>
+        ///// <returns></returns>
+        //private string GetFieldsFromTableAttributes(DAL.ReferenceTable tab)
+        //{
+        //    StringBuilder sb = new StringBuilder();
+        //    foreach (string key in tab.Columns.Keys)
+        //    {
+        //        sb.Append("[");
+        //        sb.Append(key);
+        //        sb.Append("]");
+        //        sb.Append(",");
+        //    }
+        //    return sb.ToString().TrimEnd(',');
+        //}
         /// <summary>
         /// 获取插入字段
         /// </summary>
@@ -1009,69 +1040,69 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
             ArrayList al = new ArrayList();
             foreach (string key in tab.Columns.Keys)
             {
-                al.Add(key);                
+                al.Add(key);
             }
             return al;
         }
-        /// <summary>
-        /// 获取无更新引用表IDs
-        /// </summary>
-        /// <param name="refTabIds"></param>
-        /// <returns></returns>
-        private ArrayList getReferenceIDsForClear(ArrayList refTabIds)
-        {
-            ArrayList referIdsCopy = null;
-            if (Util.GlobalVariable.ReferenceTables != null && Util.GlobalVariable.ReferenceTables.Count > 0)
-            {
-                referIdsCopy = (ArrayList)Util.GlobalVariable.ReferenceTables.Clone();
-                if (refTabIds != null && refTabIds.Count > 0)
-                {
-                    foreach (string id in refTabIds)
-                    {
-                        if (referIdsCopy.Contains(id))
-                        {
-                            referIdsCopy.Remove(id);
-                        }
-                    }
-                }
-            }
-            return referIdsCopy;
-        }
+        ///// <summary>
+        ///// 获取无更新引用表IDs
+        ///// </summary>
+        ///// <param name="refTabIds"></param>
+        ///// <returns></returns>
+        //private ArrayList getReferenceIDsForClear(ArrayList refTabIds)
+        //{
+        //    ArrayList referIdsCopy = null;
+        //    if (Util.GlobalVariable.ReferenceTables != null && Util.GlobalVariable.ReferenceTables.Count > 0)
+        //    {
+        //        referIdsCopy = (ArrayList)Util.GlobalVariable.ReferenceTables.Clone();
+        //        if (refTabIds != null && refTabIds.Count > 0)
+        //        {
+        //            foreach (string id in refTabIds)
+        //            {
+        //                if (referIdsCopy.Contains(id))
+        //                {
+        //                    referIdsCopy.Remove(id);
+        //                }
+        //            }
+        //        }
+        //    }
+        //    return referIdsCopy;
+        //}
+        ///// <summary>
+        ///// 清理Appkey 相关引用表数据
+        ///// </summary>
+        ///// <param name="referIdsCopy"></param>
+        ///// <param name="appkey"></param>
+        //private void clearReferenceData(ArrayList referIdsCopy, string appkey)
+        //{
+        //    ArrayList referTableList = new ArrayList();
+        //    if (referIdsCopy != null && referIdsCopy.Count > 0)
+        //    {
+        //        foreach (string id in referIdsCopy)
+        //        {
+        //            int tableID = Convert.ToInt32(id);
+        //            string stagingname = GetTableStagingName(tableID);
+        //            string dbtablename = GetDbTableName(tableID);
+
+        //            if (Util.GlobalVariable.BReferenceSynonyms)
+        //            {
+        //                SetSynonymsNames(tableID, ref stagingname, ref dbtablename);
+        //            }
+        //            referTableList.Add(dbtablename);
+        //        }
+
+        //        if (referTableList != null && referTableList.Count > 0)
+        //        {
+        //            DAL.ReferenceTableDAL.DeleteReferenceData(referTableList, appkey);
+        //        }
+        //    }
+        //}
         /// <summary>
         /// 清理Appkey 相关引用表数据
         /// </summary>
         /// <param name="referIdsCopy"></param>
         /// <param name="appkey"></param>
-        private void clearReferenceData(ArrayList referIdsCopy, string appkey)
-        {
-            ArrayList referTableList = new ArrayList();
-            if (referIdsCopy != null && referIdsCopy.Count > 0)
-            {
-                foreach (string id in referIdsCopy)
-                {
-                    int tableID = Convert.ToInt32(id);
-                    string stagingname = GetTableStagingName(tableID);
-                    string dbtablename = GetDbTableName(tableID);
-
-                    if (Util.GlobalVariable.BReferenceSynonyms)
-                    {
-                        SetSynonymsNames(tableID, ref stagingname, ref dbtablename);
-                    }
-                    referTableList.Add(dbtablename);
-                }
-
-                if (referTableList != null && referTableList.Count > 0)
-                {
-                    DAL.ReferenceTableDAL.DeleteReferenceData(referTableList, appkey);
-                }
-            }
-        }
-        /// <summary>
-        /// 清理Appkey 相关引用表数据
-        /// </summary>
-        /// <param name="referIdsCopy"></param>
-        /// <param name="appkey"></param>
-        private void clearReferenceData(string appkey)
+        private void ClearReferenceData(string appkey, ArrayList aldbTabs)
         {
             ArrayList referTableList = new ArrayList();
             if (Util.GlobalVariable.ReferenceTables != null && Util.GlobalVariable.ReferenceTables.Count > 0)
@@ -1079,21 +1110,28 @@ namespace Instinct.RabbitMQ.FraudCheckWinService.BLL
                 foreach (string id in Util.GlobalVariable.ReferenceTables)
                 {
                     int tableID = Convert.ToInt32(id);
-                    string stagingname = GetTableStagingName(tableID);
-                    string dbtablename = GetDbTableName(tableID);
 
-                    if (Util.GlobalVariable.BReferenceSynonyms)
-                    {
-                        SetSynonymsNames(tableID, ref stagingname, ref dbtablename);
-                    }
+                    string dbtablename = GetReferenceTabNameObj(tableID);
+
                     referTableList.Add(dbtablename);
                 }
-
-                if (referTableList != null && referTableList.Count > 0)
+            }
+            if (aldbTabs != null && aldbTabs.Count > 0)
+            {
+                foreach (string dbId in aldbTabs)
                 {
-                    DAL.ReferenceTableDAL.DeleteReferenceData(referTableList, appkey);
+                    if (!referTableList.Contains(dbId))
+                    {
+                        referTableList.Add(dbId);
+                    }
                 }
             }
+
+            if (referTableList != null && referTableList.Count > 0)
+            {
+                DAL.ReferenceTableDAL.DeleteReferenceData(referTableList, appkey);
+            }
+
         }
         #endregion
 
