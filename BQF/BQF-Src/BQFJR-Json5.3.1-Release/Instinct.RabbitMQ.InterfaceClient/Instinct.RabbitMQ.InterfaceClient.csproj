@@ -41,8 +41,8 @@
     <StartupObject>Instinct.RabbitMQ.InterfaceClient.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\DLL\log4net.dll</HintPath>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -96,6 +96,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -107,17 +108,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RabbitMQClient\RabbitMQClient.csproj">
+    <Content Include="logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common5.3.1\RabbitMQClient\RabbitMQClient.csproj">
       <Project>{ad62369c-7dea-4b7a-81db-e4701a442a72}</Project>
       <Name>RabbitMQClient</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ScintillaNET\ScintillaNET.csproj">
+    <ProjectReference Include="..\..\Common5.3.1\ScintillaNET\ScintillaNET.csproj">
       <Project>{f9b6dabd-bbc1-4638-8ce6-a5c9506bfdcb}</Project>
       <Name>ScintillaNET</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

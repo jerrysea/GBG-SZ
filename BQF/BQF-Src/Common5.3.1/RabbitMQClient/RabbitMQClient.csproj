@@ -4,17 +4,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5AF1FFEE-6430-49B6-B8E7-E306A5133D18}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{AD62369C-7DEA-4B7A-81DB-E4701A442A72}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Instinct.RabbitMQ.Collection</RootNamespace>
-    <AssemblyName>Instinct.RabbitMQ.Collection</AssemblyName>
+    <RootNamespace>SCM.RabbitMQClient</RootNamespace>
+    <AssemblyName>SCM.RabbitMQClient</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,63 +25,57 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\SCM.RabbitMQClient.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Nik_Collection_32px_1185344_easyicon.net.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>Instinct.RabbitMQ.Collection.Program</StartupObject>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DecTech.Library, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Common5.3.1\DLL\DecTech.Library.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\BQFJR-Json5.3.1-Release\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    <Reference Include="RabbitMQ.Client">
+      <HintPath>..\DLL\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\Business.cs" />
-    <Compile Include="BLL\MessageTypeConst.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Common\ILog.cs" />
+    <Compile Include="Common\JsonXmlObjectParser.cs" />
+    <Compile Include="Common\LogLocation.cs" />
+    <Compile Include="EventMessage.cs" />
+    <Compile Include="EventMessageFactory.cs" />
+    <Compile Include="EventMessageResult.cs" />
+    <Compile Include="IMessageSerializer.cs" />
+    <Compile Include="IRabbitMqClient.cs" />
+    <Compile Include="BaseMqContract.cs" />
+    <Compile Include="MessageJsonSerializer.cs" />
+    <Compile Include="MessageXmlSerializer.cs" />
+    <Compile Include="MessageSerializerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\GlobalVariables.cs" />
-    <Compile Include="Util\LogHelper.cs" />
+    <Compile Include="Common\Utility.cs" />
+    <Compile Include="RabbitMqClientJSONSimple.cs" />
+    <Compile Include="RabbitMqClientJSONSingle.cs" />
+    <Compile Include="RabbitMqClientXMLSimple.cs" />
+    <Compile Include="RabbitMqClientXMLSingle.cs" />
+    <Compile Include="RabbitMqClientContext.cs" />
+    <Compile Include="RabbitMqClientFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Common5.3.1\Instinct.MQCollection.Lib\Instinct.Collection.Lib.csproj">
-      <Project>{1b93d8d4-4952-41a9-9bc2-d9434a604473}</Project>
-      <Name>Instinct.Collection.Lib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Common5.3.1\RabbitMQClient\RabbitMQClient.csproj">
-      <Project>{ad62369c-7dea-4b7a-81db-e4701a442a72}</Project>
-      <Name>RabbitMQClient</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Nik_Collection_32px_1185344_easyicon.net.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

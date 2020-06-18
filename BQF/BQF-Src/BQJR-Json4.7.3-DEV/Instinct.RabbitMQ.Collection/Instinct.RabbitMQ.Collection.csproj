@@ -9,9 +9,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Instinct.RabbitMQ.Collection</RootNamespace>
     <AssemblyName>Instinct.RabbitMQ.Collection</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,16 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Nik_Collection_32px_1185344_easyicon.net.ico</ApplicationIcon>
+    <ApplicationIcon>Instinct.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>Instinct.RabbitMQ.Collection.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DecTech.Library, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Common5.3.1\DLL\DecTech.Library.dll</HintPath>
-    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -68,17 +63,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common5.3.1\Instinct.MQCollection.Lib\Instinct.Collection.Lib.csproj">
+    <ProjectReference Include="..\..\Common4.7.3\Instinct.MQCollection.Lib\Instinct.Collection.Lib.csproj">
       <Project>{1b93d8d4-4952-41a9-9bc2-d9434a604473}</Project>
       <Name>Instinct.Collection.Lib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Common5.3.1\RabbitMQClient\RabbitMQClient.csproj">
+    <ProjectReference Include="..\..\Common4.7.3\RabbitMQClient\RabbitMQClient.csproj">
       <Project>{ad62369c-7dea-4b7a-81db-e4701a442a72}</Project>
       <Name>RabbitMQClient</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Nik_Collection_32px_1185344_easyicon.net.ico" />
+    <Content Include="Instinct.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

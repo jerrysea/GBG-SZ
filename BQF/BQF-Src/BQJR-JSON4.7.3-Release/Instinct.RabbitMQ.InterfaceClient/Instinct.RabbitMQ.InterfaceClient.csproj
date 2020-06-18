@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Instinct.RabbitMQ.InterfaceClient</RootNamespace>
     <AssemblyName>Instinct.RabbitMQ.InterfaceClient</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -111,11 +111,11 @@
     <Content Include="logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common5.3.1\RabbitMQClient\RabbitMQClient.csproj">
+    <ProjectReference Include="..\..\Common4.7.3\RabbitMQClient\RabbitMQClient.csproj">
       <Project>{ad62369c-7dea-4b7a-81db-e4701a442a72}</Project>
       <Name>RabbitMQClient</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Common5.3.1\ScintillaNET\ScintillaNET.csproj">
+    <ProjectReference Include="..\..\Common4.7.3\ScintillaNET\ScintillaNET.csproj">
       <Project>{f9b6dabd-bbc1-4638-8ce6-a5c9506bfdcb}</Project>
       <Name>ScintillaNET</Name>
     </ProjectReference>

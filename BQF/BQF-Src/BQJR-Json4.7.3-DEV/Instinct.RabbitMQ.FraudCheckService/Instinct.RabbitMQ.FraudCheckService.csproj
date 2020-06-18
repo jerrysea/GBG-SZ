@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5AF1FFEE-6430-49B6-B8E7-E306A5133D18}</ProjectGuid>
+    <ProjectGuid>{12A3AEDA-CA82-44A8-A3B4-BBC3F212AFDF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Instinct.RabbitMQ.Collection</RootNamespace>
-    <AssemblyName>Instinct.RabbitMQ.Collection</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <RootNamespace>Instinct.RabbitMQ.FraudCheckService</RootNamespace>
+    <AssemblyName>Instinct.RabbitMQ.FraudCheckService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,54 +32,78 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Nik_Collection_32px_1185344_easyicon.net.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>Instinct.RabbitMQ.Collection.Program</StartupObject>
+    <ApplicationIcon>Instinct.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DecTech.Library, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Common5.3.1\DLL\DecTech.Library.dll</HintPath>
+      <HintPath>..\..\Common4.7.3\DLL\DecTech.Library.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\Business.cs" />
-    <Compile Include="BLL\MessageTypeConst.cs" />
+    <Compile Include="BLL\ApplicationsTrace.cs" />
+    <Compile Include="BLL\InstinctBusiness.cs" />
+    <Compile Include="BLL\ParticipleLayout.cs" />
+    <Compile Include="BLL\ParticipleParameter.cs" />
+    <Compile Include="BLL\ParticipleParse.cs" />
+    <Compile Include="DAL\Error.cs" />
+    <Compile Include="DAL\InstinctFraudCheckThread.cs" />
+    <Compile Include="DAL\ParticipleDAl.cs" />
+    <Compile Include="DAL\ReferenceColumn.cs" />
+    <Compile Include="DAL\ReferenceTable.cs" />
+    <Compile Include="DAL\ReferenceTableDAL.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\GlobalVariables.cs" />
+    <Compile Include="BLL\FM_Address.cs" />
+    <Compile Include="BLL\FM_Company.cs" />
+    <Compile Include="Util\GlobalVariable.cs" />
     <Compile Include="Util\LogHelper.cs" />
+    <Compile Include="Util\MessageTypeConst.cs" />
+    <Compile Include="BLL\Segmentation.cs" />
+    <Compile Include="Util\SqlHelper.cs" />
+    <Compile Include="Util\SqlHelperSchemaExtension.cs" />
+    <Compile Include="Util\Tool.cs" />
+    <Compile Include="Util\XMLProcess.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common5.3.1\Instinct.MQCollection.Lib\Instinct.Collection.Lib.csproj">
-      <Project>{1b93d8d4-4952-41a9-9bc2-d9434a604473}</Project>
-      <Name>Instinct.Collection.Lib</Name>
+    <Content Include="Instinct.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common4.7.3\ClassXMLParse_OnlineService\ClassXMLParse.vbproj">
+      <Project>{0f2fa5d0-d0f9-4c0d-a331-c0637bd8d78b}</Project>
+      <Name>ClassXMLParse</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Common5.3.1\RabbitMQClient\RabbitMQClient.csproj">
+    <ProjectReference Include="..\..\Common4.7.3\ClsOnlineServiceCall\ClsOnlineServiceCall.vbproj">
+      <Project>{eb2c4457-878e-47d2-82a0-6b646f440096}</Project>
+      <Name>ClsOnlineServiceCall</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common4.7.3\PanGu\PanGu.csproj">
+      <Project>{091e1c60-f77b-45a1-844c-86c5f508b57b}</Project>
+      <Name>PanGu</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common4.7.3\RabbitMQClient\RabbitMQClient.csproj">
       <Project>{ad62369c-7dea-4b7a-81db-e4701a442a72}</Project>
       <Name>RabbitMQClient</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Nik_Collection_32px_1185344_easyicon.net.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

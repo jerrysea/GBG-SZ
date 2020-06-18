@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5AF1FFEE-6430-49B6-B8E7-E306A5133D18}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{1B93D8D4-4952-41A9-9BC2-D9434A604473}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Instinct.RabbitMQ.Collection</RootNamespace>
-    <AssemblyName>Instinct.RabbitMQ.Collection</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <RootNamespace>Instinct.MQCollection.Lib</RootNamespace>
+    <AssemblyName>Instinct.Collection.Lib</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,22 +29,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Nik_Collection_32px_1185344_easyicon.net.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>Instinct.RabbitMQ.Collection.Program</StartupObject>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DecTech.Library, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Common5.3.1\DLL\DecTech.Library.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    <Reference Include="DecTech.Library">
+      <HintPath>..\DLL\DecTech.Library.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -56,29 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\Business.cs" />
-    <Compile Include="BLL\MessageTypeConst.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="DAL\InstinctDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\GlobalVariables.cs" />
-    <Compile Include="Util\LogHelper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Common5.3.1\Instinct.MQCollection.Lib\Instinct.Collection.Lib.csproj">
-      <Project>{1b93d8d4-4952-41a9-9bc2-d9434a604473}</Project>
-      <Name>Instinct.Collection.Lib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Common5.3.1\RabbitMQClient\RabbitMQClient.csproj">
-      <Project>{ad62369c-7dea-4b7a-81db-e4701a442a72}</Project>
-      <Name>RabbitMQClient</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Nik_Collection_32px_1185344_easyicon.net.ico" />
+    <Compile Include="Util\SqlHelper.cs" />
+    <Compile Include="Util\SqlHelperSchemaExtension.cs" />
+    <Compile Include="Util\Tool.cs" />
+    <Compile Include="Util\XMLProcess.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

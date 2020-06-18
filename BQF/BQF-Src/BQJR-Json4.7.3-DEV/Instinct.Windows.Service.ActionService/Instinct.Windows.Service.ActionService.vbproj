@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -15,14 +15,14 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <ApplicationIcon>responsibility_32px_1233309_easyicon.net.ico</ApplicationIcon>
+    <ApplicationIcon>Instinct.ico</ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <PublishUrl>http://localhost/Instinct.Windows.Service.ActionService/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
@@ -62,17 +62,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ClassXMLParse, Version=5.3.1.5, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Common5.3.1\DLL\ClassXMLParse.dll</HintPath>
-    </Reference>
     <Reference Include="DecTech.Library, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Common5.3.1\DLL\DecTech.Library.dll</HintPath>
-    </Reference>
-    <Reference Include="Instinct.General, Version=5.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Common5.3.1\DLL\Instinct.General.dll</HintPath>
+      <HintPath>..\..\Common4.7.3\DLL\DecTech.Library.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationBlocks.Data.2.0.0\lib\net45\Microsoft.ApplicationBlocks.Data.dll</HintPath>
@@ -89,8 +81,9 @@
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebServiceInvokeClass">
-      <HintPath>..\..\Common5.3.1\DLL\WebServiceInvokeClass.dll</HintPath>
+    <Reference Include="WebServiceInvokeClass, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common4.7.3\DLL\WebServiceInvokeClass.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -188,7 +181,7 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="responsibility_32px_1233309_easyicon.net.ico" />
+    <Content Include="Instinct.ico" />
     <None Include="INI files\SPDB\Instinct.ini" />
     <None Include="INI files\DTS\Instinct.ini" />
     <None Include="packages.config" />
@@ -240,7 +233,15 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common5.3.1\RabbitMQClient\RabbitMQClient.csproj">
+    <ProjectReference Include="..\..\Common4.7.3\ClassXMLParse_OnlineService\ClassXMLParse.vbproj">
+      <Project>{0f2fa5d0-d0f9-4c0d-a331-c0637bd8d78b}</Project>
+      <Name>ClassXMLParse</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common4.7.3\Instinct.General\Instinct.General.vbproj">
+      <Project>{6f028d43-f60b-44f7-bb16-bb5adeb50f70}</Project>
+      <Name>Instinct.General</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common4.7.3\RabbitMQClient\RabbitMQClient.csproj">
       <Project>{ad62369c-7dea-4b7a-81db-e4701a442a72}</Project>
       <Name>RabbitMQClient</Name>
     </ProjectReference>

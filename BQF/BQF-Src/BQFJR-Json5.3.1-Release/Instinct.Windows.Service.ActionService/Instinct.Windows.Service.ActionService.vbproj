@@ -62,26 +62,27 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ClassXMLParse, Version=4.7.3.3, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ClassXMLParse, Version=5.3.1.5, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLL\ClassXMLParse.dll</HintPath>
+      <HintPath>..\..\Common5.3.1\DLL\ClassXMLParse.dll</HintPath>
+    </Reference>
+    <Reference Include="ClsOnlineServiceCall">
+      <HintPath>..\..\Common5.3.1\DLL\ClsOnlineServiceCall.dll</HintPath>
     </Reference>
     <Reference Include="DecTech.Library, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLL\DecTech.Library.dll</HintPath>
+      <HintPath>..\..\Common5.3.1\DLL\DecTech.Library.dll</HintPath>
     </Reference>
-    <Reference Include="Instinct.General, Version=4.7.3.3, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLL\Instinct.General.dll</HintPath>
+    <Reference Include="Instinct.General">
+      <HintPath>..\..\Common5.3.1\DLL\Instinct.General.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLL\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+      <HintPath>..\packages\Microsoft.ApplicationBlocks.Data.2.0.0\lib\net45\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualBasic.Compatibility" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLL\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
@@ -93,7 +94,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="WebServiceInvokeClass, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLL\WebServiceInvokeClass.dll</HintPath>
+      <HintPath>..\..\Common5.3.1\DLL\WebServiceInvokeClass.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +195,7 @@
     <Content Include="responsibility_32px_1233309_easyicon.net.ico" />
     <None Include="INI files\SPDB\Instinct.ini" />
     <None Include="INI files\DTS\Instinct.ini" />
+    <None Include="packages.config" />
     <None Include="Web References\InstinctAction\InstinctAction.disco" />
     <None Include="Web References\InstinctAction\InstinctAction.wsdl" />
     <None Include="Web References\InstinctAction\Reference.map">
@@ -242,7 +244,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RabbitMQClient\RabbitMQClient.csproj">
+    <ProjectReference Include="..\..\Common5.3.1\RabbitMQClient\RabbitMQClient.csproj">
       <Project>{ad62369c-7dea-4b7a-81db-e4701a442a72}</Project>
       <Name>RabbitMQClient</Name>
     </ProjectReference>

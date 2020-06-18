@@ -9,9 +9,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Instinct.RabbitMQ.FraudCheckWinService</RootNamespace>
     <AssemblyName>Instinct.RabbitMQ.FraudCheckWinService</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,23 +32,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>antivirus_check_protection_shield_48px_1899_easyicon.net.ico</ApplicationIcon>
+    <ApplicationIcon>Instinct.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>Instinct.RabbitMQ.FraudCheckWinService.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ClassXMLParse, Version=5.3.1.5, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Common5.3.1\DLL\ClassXMLParse.dll</HintPath>
-    </Reference>
-    <Reference Include="ClsOnlineServiceCall, Version=5.3.1.5, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Common5.3.1\DLL\ClsOnlineServiceCall.dll</HintPath>
-    </Reference>
     <Reference Include="DecTech.Library, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Common5.3.1\DLL\DecTech.Library.dll</HintPath>
+      <HintPath>..\..\Common4.7.3\DLL\DecTech.Library.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
@@ -109,7 +100,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="antivirus_check_protection_shield_48px_1899_easyicon.net.ico" />
+    <Content Include="Instinct.ico" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FraudCheckService.resx">
@@ -120,11 +111,19 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common5.3.1\PanGu\PanGu.csproj">
+    <ProjectReference Include="..\..\Common4.7.3\ClassXMLParse_OnlineService\ClassXMLParse.vbproj">
+      <Project>{0f2fa5d0-d0f9-4c0d-a331-c0637bd8d78b}</Project>
+      <Name>ClassXMLParse</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common4.7.3\ClsOnlineServiceCall\ClsOnlineServiceCall.vbproj">
+      <Project>{eb2c4457-878e-47d2-82a0-6b646f440096}</Project>
+      <Name>ClsOnlineServiceCall</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common4.7.3\PanGu\PanGu.csproj">
       <Project>{091e1c60-f77b-45a1-844c-86c5f508b57b}</Project>
       <Name>PanGu</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Common5.3.1\RabbitMQClient\RabbitMQClient.csproj">
+    <ProjectReference Include="..\..\Common4.7.3\RabbitMQClient\RabbitMQClient.csproj">
       <Project>{ad62369c-7dea-4b7a-81db-e4701a442a72}</Project>
       <Name>RabbitMQClient</Name>
     </ProjectReference>

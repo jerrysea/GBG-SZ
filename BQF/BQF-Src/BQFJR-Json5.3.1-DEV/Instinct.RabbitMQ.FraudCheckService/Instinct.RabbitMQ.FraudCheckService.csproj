@@ -38,19 +38,20 @@
     <ApplicationIcon>antivirus_check_protection_shield_48px_1899_easyicon.net.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ClassXMLParse, Version=4.7.3.3, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ClassXMLParse, Version=5.3.1.5, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLL\ClassXMLParse.dll</HintPath>
+      <HintPath>..\..\Common5.3.1\DLL\ClassXMLParse.dll</HintPath>
     </Reference>
-    <Reference Include="ClsOnlineServiceCall, Version=4.7.3.3, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ClsOnlineServiceCall, Version=5.3.1.5, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLL\ClsOnlineServiceCall.dll</HintPath>
+      <HintPath>..\..\Common5.3.1\DLL\ClsOnlineServiceCall.dll</HintPath>
     </Reference>
-    <Reference Include="DecTech.Library">
-      <HintPath>..\DLL\DecTech.Library.dll</HintPath>
+    <Reference Include="DecTech.Library, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common5.3.1\DLL\DecTech.Library.dll</HintPath>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\DLL\log4net.dll</HintPath>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -89,19 +90,20 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PanGu\PanGu.csproj">
-      <Project>{091e1c60-f77b-45a1-844c-86c5f508b57b}</Project>
-      <Name>PanGu</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RabbitMQClient\RabbitMQClient.csproj">
-      <Project>{ad62369c-7dea-4b7a-81db-e4701a442a72}</Project>
-      <Name>RabbitMQClient</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="antivirus_check_protection_shield_48px_1899_easyicon.net.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common5.3.1\PanGu\PanGu.csproj">
+      <Project>{091e1c60-f77b-45a1-844c-86c5f508b57b}</Project>
+      <Name>PanGu</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common5.3.1\RabbitMQClient\RabbitMQClient.csproj">
+      <Project>{ad62369c-7dea-4b7a-81db-e4701a442a72}</Project>
+      <Name>RabbitMQClient</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
