@@ -1,0 +1,32 @@
+﻿
+
+
+z016
+value is not matched
+z013--- data is missing
+z012
+2014070510072337	吴世霞
+z011
+吴世霞2014070510072337
+余叔同2016100900000112
+文春卫2016101900000004
+z010 Z017 there is an searcj for these 2 rules 
+
+2016060600004800002
+2016012700002400010
+2016031600001600001
+2016080400002400003
+2016080800000800001
+2016011800002400002
+2016072500002300001
+2016072500002100001
+
+z008
+QZZC_UBNK_CRDT_INFO.LOWEST_FLVL_CLASS  value is not '关注一','关注二','可疑','次级','损失'
+
+z006--- data is missing
+z005--- data is missing
+z004--- data is missing
+z003--- data is missing
+z002--- data is missing
+z001--- data is missing

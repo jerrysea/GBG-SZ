@@ -1,0 +1,27 @@
+
+(0 行受影响)
+DatbaseName, SchemaName,  TableName,   IndexName,   Fragmentation %
+-------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------------------
+InstinctDRC, dbo,         A_Applicant, IX_A_Applicant_Full_Company_Address ,99.56
+InstinctDRC, dbo,         A_Applicant, IX_A_Applicant_Surname         , 99.4
+InstinctDRC, dbo,         A_Applicant, IX_A_Applicant_User_Field10  , 99.28
+InstinctDRC, dbo,         A_Applicant, IX_A_Applicant_Full_Home_Address   ,99.27
+InstinctDRC, dbo,         A_Guarantor, IX_A_Guarantor_Mobile_Phone_Number, 99.21
+InstinctDRC, dbo,         A_Applicant, IX_A_Applicant_Mobile_Phone_Number , 99.1
+InstinctDRC, dbo,         A_Applicant, IX_A_Applicant_Id_Number1 , 99.06
+InstinctDRC, dbo,         A_Applicant, IX_A_Applicant_Date_Of_Birth ,99.05
+InstinctDRC, dbo,         A_Guarantor, IX_A_Guarantor_Full_Name   , 99.04
+InstinctDRC, dbo,         A_Guarantor, IX_A_Guarantor_Surname     ,99.04
+InstinctDRC, dbo,         A_Applicant, IX_A_Applicant_Company_Address4  ,   99.01
+InstinctDRC, dbo,         A_Applicant, IX_A_Applicant_Company_Name     ,  99
+InstinctDRC, dbo,         A_Applicant, IX_A_Applicant_Full_Name       ,  98.9
+InstinctDRC, dbo,         A_Applicant, IX_A_Applicant_Company_Phone_Number ,  98.89
+InstinctDRC, dbo,         A_Application,IX_A_Application_Load_Start_Time ,98.88
+InstinctDRC, dbo,         A_Application,IX_A_Application_Random_Number ,98.87
+InstinctDRC, dbo,         A_Applicant, IX_A_Applicant_Home_Address4   ,98.81
+InstinctDRC, dbo,         A_Applicant, IX_A_Applicant_Age_Of_Applicant  , 98.71
+InstinctDRC, dbo,         TranslateDic,traIndex,    97.06
+InstinctDRC, dbo,         HRule_Sets,  PK_HRule_Sets  , 96.49
+
+(20 行受影响)
+

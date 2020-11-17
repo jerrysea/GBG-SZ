@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<DTSConfiguration>
+  <DTSConfigurationHeading>
+    <DTSConfigurationFileInfo GeneratedBy="WIN-2008-M1\Administrator" GeneratedFromPackageName="YJXXIMPORT" GeneratedFromPackageID="{3A8EF478-832B-430E-8547-184185466E59}" GeneratedDate="2016/8/30 11:25:51"/>
+  </DTSConfigurationHeading>
+  <Configuration ConfiguredType="Property" Path="\Package.Connections[错误日志].Properties[ConnectionString]" ValueType="String">
+    <ConfiguredValue>D:\Net\Target\error\160830.log</ConfiguredValue>
+  </Configuration>
+  <Configuration ConfiguredType="Property" Path="\Package.Variables[User::InputDir].Properties[Value]" ValueType="String">
+    <ConfiguredValue>D:\Net\INPUT</ConfiguredValue>
+  </Configuration>
+  <Configuration ConfiguredType="Property" Path="\Package.Variables[User::TargetDir].Properties[Value]" ValueType="String">
+    <ConfiguredValue>D:\Net\Target</ConfiguredValue>
+  </Configuration>
+</DTSConfiguration>

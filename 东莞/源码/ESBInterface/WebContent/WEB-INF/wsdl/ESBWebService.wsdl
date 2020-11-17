@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.dectech.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.dectech.com" name="ESBWebService">
+<types>
+<xs:schema xmlns:tns="http://www.dectech.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://www.dectech.com">
+<xs:element name="DoActionString" type="tns:DoActionString"/>
+<xs:element name="DoActionStringResponse" type="tns:DoActionStringResponse"/>
+<xs:complexType name="DoActionString">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="DoActionStringResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+</types>
+<message name="DoActionString">
+<part name="parameters" element="tns:DoActionString"/>
+</message>
+<message name="DoActionStringResponse">
+<part name="parameters" element="tns:DoActionStringResponse"/>
+</message>
+<portType name="ESBWebService">
+<operation name="DoActionString">
+<input wsam:Action="http://www.dectech.com/ESBWebService/DoActionStringRequest" message="tns:DoActionString"/>
+<output wsam:Action="http://www.dectech.com/ESBWebService/DoActionStringResponse" message="tns:DoActionStringResponse"/>
+</operation>
+</portType>
+<binding name="ESBServiceInstanceBinding" type="tns:ESBWebService">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="DoActionString">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+</binding>
+<service name="ESBWebService">
+<port name="ESBServiceInstance" binding="tns:ESBServiceInstanceBinding">
+<soap:address location="http://localhost:8080/ESBInterface/ESBWebService"/>
+</port>
+</service>
+</definitions>

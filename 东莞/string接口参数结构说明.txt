@@ -1,0 +1,369 @@
+Organisation - Org组织A - Must be DRC
+Country - County国家 - Must be CN
+Group Member Code - Set to NULL
+Application Number - AppNum申请编号
+Capture Date - 申请件录入日期
+Expiry Date - 身份证过期日期
+Application Date - AppDate申请日期
+Application Type - 申请类型
+Amount/Limit - 固定额度
+Branch - 进件分行
+Decision - 决定
+Decision Reason
+Decision Date - 决定时间
+User Field 1 - 决定代码
+User Field 2 - Savings Amount
+User Field 3 - 帐号
+User Field 4 - 卡号
+User Field 5 - 主卡卡号
+User Field 6 - 主副卡标识
+User Field 7 - 主卡申请号
+User Field 8 - 卡产品代码
+User Field 9 - 拒绝原因代码
+User Field 10 - 评分系统决定代码
+User Field 11 - 信用评分值
+User Field 12 - 进件类型
+User Field 13 - 进件状态代码
+User Field 14 - 申请来源代码
+User Field 15 - 客户类别ID
+User Field 16 - 客户号
+User Field 17 - 银行机构代码
+User Field 18 - 新开卡账户指示
+User Field 19 - 员工指示
+User Field 20 - VIP指示
+User Field 21 - 本币自动还款指示
+User Field 22 - 自动过还款类型
+User Field 23 - 自动还款绑定账户类型
+User Field 24 - 自动还款绑定帐号
+User Field 25 - 自动还款绑定账户名
+User Field 28 - 请求本币额度
+User Field 29 - 请求客户额度
+User Field 30 - 核准额度
+Applicant Category - Must be A
+Id Number 1 - ID证件号码
+Id Number 2 - ID Type证件类型ID
+Surname - Nme姓名
+First Name - Other Nme别名
+Middle Name - Other Nme2别名2
+Sex - Sex性别
+Date Of Birth - DOB出生日期
+Home Address 1 - Hm Prov住址省
+Home Address 2 - Hm City住址市
+Home Address 3 - Hm District住址区
+Home Address 4 - Hm Addr住址地址
+Home Address 5 - 身份证所在省
+Home Address 6 - 身份证详细地址
+Home Postcode - Hm PCde住址-邮编
+Home Phone Number - Hm Ph联系电话
+Mobile Phone Number - Mobile移动手机
+Company Name - Cmpy Nme公司名称
+Company Address 1 - Compy Prov公司所属省
+Company Address 2 - Compy City公司所在城市
+Company Address 3 - Compy District公司所在区
+Company Address 4 - Compy Addr公司地址
+Company Address 5 - 账单地址
+Company Address 6 - 卡片寄送地址
+Company Postcode - Compy PCde公司邮政编码
+Company Phone Number - Compy Ph公司联系电话
+User Field 1 - Rel与主卡持卡人关系
+User Field 2 - Marital Stat婚姻状态
+User Field 3 - Position职位
+User Field 4 - Title职称
+User Field 5 - Occupation职业
+User Field 6 - Email邮件地址
+User Field 7 - Nature of Fraud
+User Field 8 - 民族
+User Field 9 - 种族
+User Field 10 - 年收入
+User Field 11 - 支行建议额度
+User Field 13 - QQ号码
+User Field 14 - Resi Stat住宅状况
+User Field 15 - Junior Sch就读小学名称
+User Field 16 - Edu教育水平
+User Field 17 - Per Inc Lvl个人收入水平
+User Field 18 - Fam Inc Lvl家庭收入水平
+User Field 19 - Society Stat社会状态
+User Field 20 - Mr/Ms称谓
+Guarantor Category - Must be G
+Id Number 1 - ID联系人证件号码
+Id Number 2 - ID Type联系人证件类型
+Surname - Nme联系人姓名
+Sex - Sex联系人性别
+Date Of Birth - BOD联系人出生日期
+Home Address 1 - Prov联系人所在省
+Home Address 2 - City联系人所在市
+Home Address 3 - 户口所在城市
+Home Address 4 - 户口所在省
+Home Address 5 - 户口所在国家
+Home Address 6 - 籍贯
+Home Phone Number - Phone联系人电话
+Mobile Phone Number - Mobile联系人移动电话
+Company Name - Compy联系人公司名称
+Company Phone Number - Compy Phone联系人公司电话
+User Field 1 - Type联系人类型代码
+User Field 2 - Rel联系人与属主关系
+User Field 6 - IsCustom联系人是否本行客户
+User Field 7 - Marital Stat联系人婚姻状态
+User Field 8 - Email联系人电邮
+Introducer/Agent Category - Must be I
+Id Number 1 - Intro No推荐人号码
+Id Number 2 - Intro Card No推荐人卡号
+Id Number 3 - Intro Account推荐人付款帐号
+Surname - Nme推荐人姓名
+User Field 1 - Rel推荐人与银行关系
+User Field 2 - Type推荐人类型
+User Field 6 - 征信决定
+User Field 7 - 征信操作员
+User Field 8 - 进入催收指示
+User Field 9 - 是否不良逾期客户
+Reference Category - Must be R
+User Field 1 - 是否申请金荷包
+User Field 2 - 金荷包转入账号
+User Field 6 - 是否申请银荷包
+User Field 7 - 银荷包转入账号
+User Field 8 - 是否申请汽车分期
+User Field 9 - 领卡方式
+User Field 10 - 卡递送分行
+Valuer Category -  Must be V
+Id Number 1 - 合同/借据编号
+Surname - 欠款人姓名
+First Name - 证件号码
+Middle Name - 拖欠金额
+Company Address 1 - 拖欠事由
+Company Address 6 - 异议备注
+User Field 1 - 拖欠币种
+User Field 5 - 拖欠起始日期
+User Category - Must be U
+Surname - VIP参考人
+Home Address 1 - 出生省份
+Home Address 2 - 出生城市
+Home Address 3 - 定居省份
+Home Address 4 - 定居城市
+Home Address 5 - 户口所在省份
+Home Address 6 - 户口所在城市
+Home Phone Number - VIP参考人电话
+User Field 1 - 客户默认地址类型
+User Field 2 - 与银行关系代码
+User Field 6 - 收入水平代码
+User Field 7 - 雇佣稳定性
+User Field 8 - 永久居住标识
+User Field 9 - 在他行信贷状态
+Credit Bureau Category - Must be C
+Id Number 1 - 纳税人识别号
+Surname - 纳税人名称
+Short Name - 主管税务机关
+Date Of Birth - 认定日期
+Home Address 1 - 异议备注
+User 2 Category - Must be O
+User Field 29 - 欠税余额
+User Field 30 - 欠税属期
+User Field 31 - 纳税人名称
+User Field 32 - 证件号码
+User Field 33 - 主管税务机关
+User Field 34 - 所欠税种
+User Field 35 - 异议备注
+User Field 46 - 欠税发生时间
+UCA Category - Must be W
+Id Number 1 - 证件号码
+Surname - 当事人姓名
+Home Address 1 - 执法/复议/审判机关
+Home Address 2 - 案号
+User Field 5 - 具体日期
+User Field 6 - 日期类别
+User Field 16 - 违法事由
+User Field 17 - 行政执法结果
+User Field 18 - 法院审理结果
+User Field 19 - 异议备注
+CBA Category - Must be B
+Id Number 1 - 证件号码
+Surname - 当事人姓名
+Short Name - 侦查/批捕/审判机关
+Home Address 1 - 案号
+User Field 21 - 处理时间
+User Field 29 - 违法事由
+User Field 30 - 处理结果
+User Field 31 - 异议备注
+U2A Category - Must be F
+User Field 30 - 日期类别
+User Field 31 - 当事人姓名
+User Field 32 - 证件号码
+User Field 33 - 审理机关
+User Field 34 - 案号
+User Field 35 - 诉讼地位
+User Field 46 - 具体日期
+User Field 56 - 涉案事由
+User Field 57 - 异议备注
+UCB Category - Must be J
+Id Number 1 - 证件号码
+Id Number 2 - 涉案金额
+Id Number 3 - 诉讼地位
+Surname - 当事人姓名
+First Name - 审理机关
+Middle Name - 案号
+Date Of Birth - 结案时间
+User Field 16 - 涉案事由
+User Field 17 - 异议备注
+CBB Category - Must be K
+Id Number 1 - 证件号码
+Surname - 被限制人姓名
+First Name - 执行法院
+Middle Name - 执行案号
+Date Of Birth - 具体日期
+Home Address 1 - 日期类别
+Home Address 2 - 执行状态
+User Field 29 - 执行内容
+User Field 30 - 异议备注
+U2B Category - Must be L
+User Field 29 - 日期类别
+User Field 30 - 证件号码
+User Field 31 - 被执行人姓名
+User Field 32 - 执行法院
+User Field 33 - 执行案号
+User Field 34 - 执行状态
+User Field 46 - 具体日期
+User Field 56 - 执行内容
+User Field 57 - 异议备注
+UCC Category - Must be M
+Id Number 1 - 证件号码
+Id Number 3 - 日期类别
+Surname - 被执行人姓名
+First Name - 执行法院
+Middle Name - 执行案号
+Date Of Birth - 具体日期
+Home Address 1 - 执行状态
+User Field 16 - 执行内容
+User Field 17 - 异议备注
+CBC Category - Must be X
+Id Number 1 - 证件号码
+Surname - 被执行人姓名
+First Name - 执行法院
+Middle Name - 执行案号
+Short Name - 执行状态
+Date Of Birth - 立案时间
+User Field 29 - 执行内容
+User Field 30 - 异议备注
+U2C Category - Must be Z
+User Field 1 - 呆账余额
+User Field 2 - 资产处置余额
+User Field 3 - 保证人代偿余额
+User Field 4 - 未结清贷款法人机构数
+User Field 5 - 未结清贷款机构数
+User Field 6 - 未结清贷款笔数
+User Field 7 - 未结清贷款合同总额
+User Field 8 - 未结清贷款余额
+User Field 9 - 未结清贷款最近6个月平均应还款
+User Field 10 - 未销户准贷记卡发卡法人机构数
+User Field 11 - 未销户准贷记卡发卡机构数
+User Field 12 - 未销户准贷记卡账户数
+User Field 13 - 未销户准贷记卡授信总额
+User Field 14 - 未销户准贷记卡单家行最高授信额
+User Field 15 - 未销户准贷记卡单家行最低授信额
+User Field 16 - 未销户准贷记卡透支余额
+User Field 17 - 未销户准贷记卡最近6个月平均使用额度
+User Field 18 - 未销户贷记卡发卡法人机构数
+User Field 19 - 未销户贷记卡发卡机构数
+User Field 20 - 未销户贷记卡账户数
+User Field 21 - 未销户贷记卡授信总额
+User Field 22 - 未销户贷记卡单家行最高授信额
+User Field 23 - 未销户贷记卡单家行最低授信额
+User Field 24 - 未销户贷记卡已用额度
+User Field 25 - 未销户贷记卡最近6个月平均使用额度
+User Field 26 - 最近1个月内的查询机构数(贷款审批)
+User Field 27 - 最近1个月内的查询机构数(信用卡审批)
+User Field 28 - 最近1个月内的查询次数(贷款审批)
+User Field 29 - 最近1个月内的查询次数(信用卡审批)
+User Field 30 - 最近2年内的查询次数(贷后管理)
+User Field 31 - 最近2年内的查询次数(担保资格审查)
+User Field 32 - 最近2年内的查询次数(特约商户实名审查)
+User Field 33 - 最近1个月内的查询次数(本人查询)
+User Field 34 - 贷款逾期单月最高逾期总额
+User Field 35 - 贷记卡逾期单月最高逾期总额
+User Field 36 - 准贷记卡60天以上透支笔数
+User Field 37 - 准贷记卡60天以上透支月份数
+User Field 38 - 准贷记卡60天以上透支单月最高逾期总额
+User Field 39 - 准贷记卡60天以上透支最长逾期月数
+User Field 40 - 担保汇总担保金额
+User Field 41 - 担保汇总担保本金余额
+User Field 42 - 首笔贷款发放月份
+User Field 43 - 首张贷记卡发卡月份
+User Field 44 - 首张准贷记卡发卡月份
+User Field 45 - 异议标注数目
+User Field 46 - 婚姻状况
+User Field 47 - 手机号码
+User Field 48 - 单位电话
+User Field 49 - 住宅电话
+User Field 50 - 学历
+User Field 51 - 近24个月逾期笔数
+User Field 52 - 近24个月逾期月份数
+User Field 53 - 近24个月最长逾期月数
+User Field 54 - 最大当前逾期期数
+User Field 55 - 最大当前逾期金额
+User Field 56 - 近半年贷款发放笔数
+User Field 57 - 近半年贷记卡发放笔数
+User Field 58 - 担保贷款最高五级分类
+User Field 59 - 最新公积金缴存金额
+User Field 60 - 最新养老保险缴存基数
+User Field 61 - 最新养老保险缴存金额
+User Field 62 - 未结清信贷正常类汇总(笔数)
+User Field 63 - 未结清信贷正常类汇总(余额)
+User Field 64 - 未结清信贷关注类汇总(笔数)
+User Field 65 - 未结清信贷关注类汇总(余额)
+User Field 66 - 未结清贷款次级类汇总(笔数)
+User Field 67 - 未结清贷款次级类类汇总(余额)
+User Field 68 - 未结清贷款可疑类汇总(笔数)
+User Field 69 - 未结清贷款可疑类类汇总(余额)
+User Field 70 - 未结清贷款损失类汇总(笔数)
+User Field 71 - 未结清贷款损失类类汇总(余额)
+User Field 72 - 最新公积金个人缴存比例
+User Field 73 - 最新养老保险累计缴费月数
+User Field 74 - 最新公积金缴费状态
+User Field 75 - 最新养老保险缴费状态
+User Field 121 - 征信居住状况1
+User Field 122 - 征信居住状况2
+User Field 123 - 征信居住状况3
+User Field 124 - 配偶姓名
+User Field 125 - 配偶身份证号码
+User Field 126 - 配偶证件类型
+User Field 127 - 配偶工作单位
+User Field 128 - 配偶手机号码
+User Field 129 - 征信工作单位1
+User Field 130 - 征信工作单位2
+User Field 131 - 征信工作单位3
+User Field 132 - 养老保险金缴存单位1
+User Field 133 - 养老保险金缴存单位2
+User Field 134 - 养老保险金缴存单位3
+User Field 135 - 住房公积金参缴单位1
+User Field 136 - 住房公积金参缴单位2
+User Field 137 - 住房公积金参缴单位3
+User Field 138 - 被查询者姓名
+User Field 139 - 被查询者证件类型
+User Field 140 - 被查询者证件号码
+User Field 141 - 征信居住地址1
+User Field 142 - 征信居住地址2
+User Field 143 - 征信居住地址3
+User Field 144 - 报告查询原因
+User Field 145 - 通讯地址
+User Field 146 - 户籍地址
+User Field 147 - 征信工作地址1
+User Field 148 - 征信工作地址2
+User Field 149 - 征信工作地址3
+User Field 151 - 呆账笔数
+User Field 152 - 资产处置笔数
+User Field 153 - 保证人代偿笔数
+User Field 154 - 贷款逾期笔数
+User Field 155 - 贷款逾期月份数
+User Field 156 - 贷款逾期最长逾期月数
+User Field 157 - 贷记卡逾期笔数
+User Field 158 - 贷记卡逾期月份数
+User Field 159 - 贷记卡逾期最长逾期月数
+User Field 160 - 担保汇总担保笔数
+User Field 161 - 最近一次债务接收日期
+User Field 162 - 最近一次代偿日期
+User Field 163 - 报告查询时间
+User Field 164 - 最新公积金参缴日期
+User Field 165 - 最新养老保险更新日期
+User Field 166 - 住房贷款笔数
+User Field 167 - 其他贷款笔数
+User Field 168 - 贷记卡账户数
+User Field 169 - 贷记卡账户数
+User Field 170 - 本人声明数目

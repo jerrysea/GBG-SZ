@@ -1,0 +1,17 @@
+USE [InstinctDRC]
+GO
+
+/****** Object:  Index [IX_Staging_T01_IND_CUST_CORE_INFO_P_CUST_ID_From_System]    Script Date: 2016/12/30 1:09:05 ******/
+DROP INDEX [IX_Staging_T01_IND_CUST_CORE_INFO_P_CUST_ID_From_System] ON [dbo].[Staging_T01_IND_CUST_CORE_INFO_P]
+GO
+
+/****** Object:  Index [IX_Staging_T01_IND_CUST_CORE_INFO_P_CUST_ID_From_System]    Script Date: 2016/12/30 1:09:05 ******/
+CREATE NONCLUSTERED INDEX [IX_Staging_T01_IND_CUST_CORE_INFO_P_CUST_ID_From_System] ON [dbo].[Staging_T01_IND_CUST_CORE_INFO_P]
+(
+	[Cust_ID] ASC
+)
+INCLUDE ( 	[Inputdate],
+	[From_System]) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<DTSConfiguration>
+  <DTSConfigurationHeading>
+    <DTSConfigurationFileInfo GeneratedBy="DEC-DEV-2008\Administrator" GeneratedFromPackageName="SSJSIMPORT" GeneratedFromPackageID="{DDF3BC1B-3809-4ADD-B241-133FD649628B}" GeneratedDate="2016/9/14 10:57:32"/>
+  </DTSConfigurationHeading>
+  <Configuration ConfiguredType="Property" Path="\Package.Variables[User::ConnStr].Properties[Value]" ValueType="String">
+    <ConfiguredValue>Data Source=.;Initial Catalog=InstinctDRC;User ID=InstinctSysAdm;Password=Instinct</ConfiguredValue>
+  </Configuration>
+  <Configuration ConfiguredType="Property" Path="\Package.Variables[User::Dir].Properties[Value]" ValueType="String">
+    <ConfiguredValue>D:\Net\SJJS</ConfiguredValue>
+  </Configuration>
+</DTSConfiguration>

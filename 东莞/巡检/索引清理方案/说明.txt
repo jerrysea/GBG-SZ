@@ -1,0 +1,3 @@
+1）建表：执行脚本IndexFragmentationMessage.sql
+2）建存储过程：PIndex_ReorganizeRebuild.sql
+3）执行清理：Run Sp.sql （该过程会增加数据库日志，所以最好在执行完该过程后，清理一次数据库日志）
